@@ -61,27 +61,26 @@ button, input { font: inherit; color: inherit; }
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 28px 56px;
-  display: grid; gap: 28px;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px;
 }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* header */
-.top { display: grid; gap: 14px; }
-.brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.brand .logo { font-family: var(--f-latin); font-size: 38px; line-height: 1; color: var(--accent); }
-.brand .tag { font-size: 12px; letter-spacing: .08em; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
-h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(36px, 6vw, 60px); line-height: 1.15; margin: 0; text-wrap: balance; }
-h1 .gold { color: var(--lead); }
-.lede { margin: 0; max-width: 62ch; color: var(--ink-soft); font-size: 16px; }
-.switch { display: inline-flex; background: var(--surface-2); border-radius: 999px; padding: 4px; gap: 4px; justify-self: start; flex-wrap: wrap; }
-.switch a {
-  text-decoration: none; padding: 9px 18px; border-radius: 999px; font-weight: 500; font-size: 14px; color: var(--ink-soft);
-  display: inline-flex; gap: 8px; align-items: center;
+.top {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--line);
 }
-.switch a .n { font-size: 12px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; border: 1px solid currentColor; }
+.event { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
+.event .logo { font-family: var(--f-latin); font-size: 34px; line-height: 1; color: var(--accent); }
+.event .couple-name { font-family: var(--f-display); font-weight: 700; font-size: 26px; line-height: 1.2; }
+.event .date { font-size: 13px; color: var(--ink-soft); }
+.switch { display: inline-flex; background: var(--surface-2); border-radius: 999px; padding: 4px; gap: 4px; }
+.switch a {
+  text-decoration: none; padding: 8px 18px; border-radius: 999px; font-weight: 500; font-size: 14px; color: var(--ink-soft); white-space: nowrap;
+}
 .switch a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
-.sample-note { font-size: 13px; color: var(--ink-soft); margin: 0; }
-.sample-note b { color: var(--ink); font-weight: 600; }
+.foot { text-align: center; font-size: 13px; color: var(--ink-soft); }
+.foot a { color: var(--accent); font-family: var(--f-latin); font-size: 22px; text-decoration: none; padding-inline: 4px; }
 
 /* planner */
 .planner { display: grid; gap: 16px; }
@@ -207,7 +206,8 @@ h1 .gold { color: var(--lead); }
 }
 
 /* guest view */
-.guest { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 40px; align-items: center; }
+.guest { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; }
+.screen > * { min-width: 0; }
 .phone {
   width: 100%; max-width: 340px; justify-self: center; aspect-ratio: 9 / 18.5; border-radius: 44px; padding: 12px;
   background: linear-gradient(160deg, #3a2a31, #120b0e); box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.08);
@@ -291,35 +291,6 @@ h1 .gold { color: var(--lead); }
 .with b { color: var(--ink); font-weight: 500; }
 .reveal-now { justify-self: center; border: 0; background: transparent; color: var(--ink-soft); font-size: 12px; text-decoration: underline; cursor: pointer; }
 
-.notes { display: grid; gap: 18px; min-width: 0; }
-.notes h2 { font-family: var(--f-display); font-size: clamp(28px, 4vw, 40px); margin: 0; line-height: 1.2; text-wrap: balance; }
-.notes p { margin: 0; color: var(--ink-soft); max-width: 58ch; }
-.try { display: grid; gap: 8px; }
-.try .lbl { font-size: 13px; font-weight: 600; }
-.points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-.points li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; font-size: 14px; }
-.points li::before { content: "✦"; color: var(--lead); font-size: 16px; line-height: 1.5; }
-
-/* process + contact */
-.process { border-top: 1px solid var(--line); padding-top: 28px; display: grid; gap: 18px; }
-.process h2 { margin: 0; font-family: var(--f-display); font-size: clamp(26px, 3.6vw, 36px); }
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; counter-reset: s; }
-.steps li { counter-increment: s; display: grid; gap: 6px; align-content: start; }
-.steps li::before {
-  content: counter(s, arabic-indic); font-family: var(--f-display); font-size: 34px; line-height: 1; color: var(--lead);
-}
-.steps b { font-weight: 600; }
-.steps span { color: var(--ink-soft); font-size: 14px; }
-.cta {
-  display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
-  background: var(--ink); color: var(--paper); border-radius: 26px; padding: 26px 28px;
-}
-.cta p { margin: 0; font-size: 18px; max-width: 46ch; }
-.cta p .latin { font-family: var(--f-latin); font-size: 30px; color: var(--lead); padding-inline: 4px; }
-.cta a {
-  background: var(--paper); color: var(--ink); text-decoration: none; border-radius: 999px; padding: 11px 22px; font-weight: 600; white-space: nowrap;
-}
-
 .toast {
   position: fixed; z-index: 60; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px);
   background: var(--ink); color: var(--paper); padding: 10px 18px; border-radius: 999px; font-size: 14px;
@@ -332,13 +303,20 @@ h1 .gold { color: var(--lead); }
   .board { grid-template-columns: minmax(0, 1fr); }
   .board .hall-wrap { order: -1; }
   .list { max-height: 420px; }
-  .guest { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .steps { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 520px) {
   .hall-wrap { padding: 8px; border-radius: 16px; }
-  .tbl { width: 14.5%; }
-  .zone { display: none; }
+  .top { padding-bottom: 12px; }
+  .event .couple-name { font-size: 22px; }
+  .switch { width: 100%; }
+  .switch a { flex: 1; text-align: center; }
+  /* on a real phone the guest page is the screen itself, without the phone frame */
+  .phone {
+    max-width: none; aspect-ratio: auto; height: calc(100svh - 150px); min-height: 520px;
+    padding: 0; border-radius: 0; background: none; box-shadow: none;
+  }
+  .phone::before { display: none; }
+  .screen { border-radius: 20px; border: 1px solid var(--line); padding-top: 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -347,14 +325,15 @@ h1 .gold { color: var(--lead); }
 
 <div class="app" dir="rtl" lang="ar">
   <header class="top">
-    <div class="brand"><span class="logo" lang="en" dir="ltr">Ajwaa</span><span class="tag">ترتيب المعازيم</span></div>
-    <h1>كل ضيف يلاقي مكانه <span class="gold">في ثانية</span></h1>
-    <p class="lede">من ردود المعازيم على الدعوة، بتقسّم الترابيزات بالسحب. ويوم الفرح كل ضيف يختار اسمه من القايمة على موبايله، يخربش الكارت، ويعرف ترابيزته والطريق ليها.</p>
-    <nav class="switch" aria-label="أجزاء التجربة">
-      <a href="#planner" id="tab-planner"><span class="n">١</span>ترتيب القاعة</a>
-      <a href="#guest" id="tab-guest"><span class="n">٢</span>تجربة الضيف</a>
+    <div class="event">
+      <span class="logo" lang="en" dir="ltr">Ajwaa</span>
+      <span class="couple-name">يوسف وليلى</span>
+      <span class="date">الجمعة ٤ ديسمبر ٢٠٢٦</span>
+    </div>
+    <nav class="switch" aria-label="الصفحات">
+      <a href="#planner" id="tab-planner">ترتيب القاعة</a>
+      <a href="#guest" id="tab-guest">صفحة الضيوف</a>
     </nav>
-    <p class="sample-note">بيانات تجريبية لفرح <b>يوسف وليلى</b>: ٢٩ عيلة أكدوا حضورهم من الدعوة.</p>
   </header>
 
   <!-- 1 · planner -->
@@ -364,7 +343,6 @@ h1 .gold { color: var(--lead); }
       <div class="actions">
         <button class="btn" type="button" id="auto">رتّب الباقي تلقائي</button>
         <button class="btn ghost" type="button" id="clear">فضّي القاعة</button>
-        <button class="btn ghost" type="button" id="restore">رجّع المثال</button>
       </div>
     </div>
     <div class="board">
@@ -389,35 +367,11 @@ h1 .gold { color: var(--lead); }
   </section>
 
   <!-- 2 · guest -->
-  <section class="guest" id="view-guest" aria-label="تجربة الضيف" hidden>
+  <section class="guest" id="view-guest" aria-label="صفحة الضيوف" hidden>
     <div class="phone"><div class="screen" id="screen"></div></div>
-    <div class="notes">
-      <h2>على باب القاعة: QR صغير، ومن غير طوابير</h2>
-      <p>الضيف بيفتح اللينك من موبايله من غير أي تطبيق. بيدوّر على اسمه في القايمة ويختاره، يخربش الكارت عشان يكشف ترابيزته، والخريطة توريه طريقه من الباب.</p>
-      <div class="try">
-        <span class="lbl">جرّب بنفسك بأسماء من المثال:</span>
-        <div class="chips" id="try"></div>
-      </div>
-      <ul class="points">
-        <li>أي تعديل تعمله في ترتيب القاعة بيظهر عند الضيف على طول.</li>
-        <li>مفيش كتابة: الأسماء مترتبة بالحروف، والضيف يدوس على الحرف ويلاقي اسمه في ثانية.</li>
-        <li>نفس ألوان وخطوط الدعوة، فالتجربة كلها شبه بعض من أول الدعوة لحد الترابيزة.</li>
-      </ul>
-    </div>
   </section>
 
-  <section class="process" aria-label="الخطوات">
-    <h2>بيمشي إزاي في فرحك</h2>
-    <ol class="steps">
-      <li><b>المعازيم يأكدوا من الدعوة</b><span>كل رد بيوصل بعدد الأفراد وأسمائهم، وطرفهم: عيلة العريس أو العروسة أو أصحاب.</span></li>
-      <li><b>إنت تقسّم الترابيزات</b><span>بالسحب أو بزرار "رتّب تلقائي"، وكل عيلة تفضل قاعدة مع بعض.</span></li>
-      <li><b>يوم الفرح</b><span>QR على الباب، والضيف يعرف مكانه من موبايله في ثواني.</span></li>
-    </ol>
-    <div class="cta">
-      <p>عايز التجربة دي في فرحك مع دعوة <span class="latin" lang="en" dir="ltr">Ajwaa</span>؟</p>
-      <a href="https://www.instagram.com/ajwaa.eg_26/?hl=en" target="_blank" rel="noopener">كلّمنا على إنستجرام</a>
-    </div>
-  </section>
+  <footer class="foot">بكل حب من <a href="https://www.instagram.com/ajwaa.eg_26/?hl=en" target="_blank" rel="noopener" lang="en" dir="ltr">Ajwaa</a></footer>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -446,7 +400,7 @@ h1 .gold { color: var(--lead); }
     { id: "t12", name: "٩", zone: "friends", x: 82.5, y: 84.5, c: "--glass-6" }
   ];
   var ZONE_LABELS = [
-    { side: "groom", x: 82, y: 25.5 }, { side: "bride", x: 19, y: 25.5 }, { side: "friends", x: 50, y: 72 }
+    { side: "groom", x: 82, y: 25.5 }, { side: "bride", x: 19, y: 25.5 }
   ];
   // prio 1 = close family (seated nearest the stage)
   var PARTIES = [
@@ -795,12 +749,7 @@ h1 .gold { color: var(--lead); }
   $("clear").addEventListener("click", function () {
     if (running) return;
     state.assign = {}; state.picked = null; state.openTable = null; save(); renderAll();
-    toast("القاعة فاضية. جرّب \"رتّب الباقي تلقائي\".");
-  });
-  $("restore").addEventListener("click", function () {
-    if (running) return;
-    state.assign = sampleAssign(); state.picked = null; state.openTable = null; save(); renderAll();
-    toast("رجعنا للمثال.");
+    toast("القاعة فاضية.");
   });
 
   $("q").addEventListener("input", function (e) { state.q = e.target.value; renderList(); });
@@ -1090,18 +1039,6 @@ h1 .gold { color: var(--lead); }
     cv.addEventListener("pointercancel", function () { down = false; last = null; });
   }
 
-  function renderTry() {
-    var box = $("try"); box.textContent = "";
-    ["هدى شاكر", "نور مصطفى", "مازن عاطف", "ملك ناصر"].forEach(function (n) {
-      var c = document.createElement("button"); c.type = "button"; c.className = "chip"; c.textContent = n;
-      c.addEventListener("click", function () {
-        var m = NAMES.find(function (x) { return x.name === n; });
-        if (m) showReveal(m);
-      });
-      box.appendChild(c);
-    });
-  }
-
   // ---------- views (#planner / #guest) ----------
   function route() {
     var guest = location.hash === "#guest";
@@ -1115,7 +1052,6 @@ h1 .gold { color: var(--lead); }
   window.addEventListener("hashchange", route);
 
   state.assign = load() || sampleAssign();
-  renderTry();
   route();
 })();
 </script>
