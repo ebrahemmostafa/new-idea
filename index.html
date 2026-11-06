@@ -142,32 +142,87 @@ h1 .gold { color: var(--lead); }
 
 /* hall */
 .hall-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 14px; box-shadow: var(--shadow); min-width: 0; }
+/* The hall is drawn as the real room seen from above, so it keeps the same materials in light and dark themes. */
 .hall {
+  --h-gold: #C29A55; --h-gold-dark: #8A6A3A; --h-wood-1: #B47D4B; --h-wood-2: #A26B3B; --h-green: #6F8247;
+  --h-cloth: #FFFFFF; --h-cloth-2: #F3ECE4; --h-cloth-3: #E1D4C6; --h-ivory: #FBF6EE; --h-text: #3B2C22;
   position: relative; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; container-type: inline-size;
-  border-radius: 14px; border: 1.5px solid var(--lead-soft);
+  border-radius: 14px; border: 1.5px solid var(--lead-soft); overflow: hidden;
   background:
-    repeating-linear-gradient(45deg, var(--floor) 0 12px, transparent 12px 24px),
-    var(--paper);
-  overflow: hidden;
+    radial-gradient(ellipse 75% 70% at 50% 45%, transparent 55%, rgba(70, 40, 25, .30) 100%),
+    radial-gradient(circle at 20% 42%, rgba(255, 228, 180, .45), transparent 17%),
+    radial-gradient(circle at 80% 42%, rgba(255, 228, 180, .45), transparent 17%),
+    radial-gradient(circle at 50% 80%, rgba(255, 228, 180, .35), transparent 20%),
+    radial-gradient(circle at 50% 12%, rgba(255, 236, 200, .55), transparent 22%),
+    linear-gradient(118deg, transparent 22%, rgba(150, 120, 95, .10) 23%, transparent 25%, transparent 61%, rgba(150, 120, 95, .08) 62%, transparent 64%),
+    repeating-linear-gradient(0deg, rgba(115, 85, 60, .13) 0 1px, transparent 1px 8.333%),
+    repeating-linear-gradient(90deg, rgba(115, 85, 60, .13) 0 1px, transparent 1px 6.25%),
+    linear-gradient(135deg, #F3EBE2, #E7DACB 50%, #F1E7DB);
 }
 .stage {
-  position: absolute; left: 33%; width: 34%; top: 2.5%; height: 10%;
-  border: 1.5px solid var(--lead); border-radius: 0 0 50% 50% / 0 0 100% 100%;
-  display: grid; place-items: center; font-family: var(--f-display); font-size: max(11px, 2.4cqw); color: var(--lead);
-  background: color-mix(in srgb, var(--lead) 10%, transparent);
+  position: absolute; left: 29%; width: 42%; top: 0; height: 15%;
+  border-radius: 0 0 46% 46% / 0 0 62% 62%;
+  background: linear-gradient(#FFFCF8, #EFE4D6);
+  box-shadow: 0 5px 12px rgba(60, 35, 20, .28), inset 0 -3px 0 #DCC6A2;
+}
+.stage .backdrop {
+  position: absolute; left: 3%; right: 3%; top: 0; height: 34%;
+  /* greenery wall with roses of mixed sizes; different tile widths keep the pattern from looking regular */
+  background:
+    radial-gradient(circle at 40% 45%, #FFFFFF 0 20%, transparent 23%),
+    radial-gradient(circle at 55% 70%, #F2CFCF 0 24%, transparent 27%),
+    radial-gradient(circle at 30% 30%, #E3A9B0 0 18%, transparent 21%),
+    radial-gradient(circle at 70% 35%, #FAEDE6 0 15%, transparent 18%),
+    radial-gradient(ellipse at 50% 20%, #7E9254, #5D6F3A);
+  background-size: 7.3% 100%, 9.1% 100%, 11.7% 100%, 5.9% 100%, 100% 100%;
+  background-position: 0 0, 3% 0, 6% 0, 1% 0, 0 0;
+  background-repeat: repeat-x;
+  border-radius: 0 0 40% 40%;
+  box-shadow: 0 2px 4px rgba(40, 50, 20, .35);
+}
+.stage .sofa {
+  position: absolute; left: 33%; width: 34%; top: 38%; height: 28%;
+  background: linear-gradient(#FFFEFB, #ECE1D2);
+  border: 2px solid var(--h-gold); border-radius: 40% 40% 14% 14% / 70% 70% 22% 22%;
+  box-shadow: 0 2px 4px rgba(60, 35, 20, .3);
+}
+.stage .lbl {
+  position: absolute; left: 0; right: 0; bottom: 6%; text-align: center; line-height: 1;
+  font-family: var(--f-display); font-size: max(9px, 1.7cqw); color: var(--h-gold-dark);
+}
+.aisle {
+  position: absolute; left: 46%; width: 8%; top: 63%; bottom: 3%;
+  background:
+    radial-gradient(circle at 30% 20%, #FFFFFF 0 4%, transparent 5%),
+    radial-gradient(circle at 70% 55%, #E6A5AE 0 4%, transparent 5%),
+    linear-gradient(90deg, #D9B3AD, #F4DFDB 14%, #F4DFDB 86%, #D9B3AD);
+  background-size: 100% 22%, 100% 30%, 100% 100%;
+  box-shadow: inset 0 0 0 1px rgba(170, 120, 100, .4);
 }
 .floor {
-  position: absolute; left: 38%; width: 24%; top: 30%; height: 34%; border-radius: 12px;
-  border: 1px dashed var(--lead-soft); display: grid; place-items: center; text-align: center;
-  font-size: max(9px, 1.5cqw); color: var(--ink-soft);
-  background: repeating-linear-gradient(90deg, transparent 0 9%, var(--floor) 9% 10%);
+  position: absolute; left: 37%; width: 26%; top: 29%; height: 34%; border-radius: 4px;
+  display: grid; place-items: center; text-align: center;
+  font-size: max(9px, 1.6cqw); color: rgba(255, 255, 255, .92); text-shadow: 0 1px 2px rgba(0, 0, 0, .45); letter-spacing: .03em;
+  border: 2px solid var(--h-gold);
+  background:
+    radial-gradient(ellipse at 40% 30%, rgba(255, 255, 255, .22), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(60, 30, 10, .22) 0 1px, transparent 1px 11.11%),
+    repeating-linear-gradient(90deg, var(--h-wood-1) 0 12.5%, var(--h-wood-2) 12.5% 25%);
+  box-shadow: 0 3px 8px rgba(60, 35, 20, .28);
 }
 .door {
-  position: absolute; left: 44%; width: 12%; bottom: 0; height: 2.6%; background: var(--lead);
-  border-radius: 6px 6px 0 0;
+  position: absolute; left: 42%; width: 16%; bottom: 0; height: 3%;
+  background: linear-gradient(90deg, #6B4A30 0 48%, transparent 48% 52%, #6B4A30 52%);
+  border-top: 2px solid var(--h-gold);
 }
-.door-label { position: absolute; left: 50%; bottom: 3.5%; transform: translateX(-50%); font-size: max(9px, 1.4cqw); color: var(--ink-soft); white-space: nowrap; }
-.zone { position: absolute; font-size: max(9px, 1.45cqw); color: var(--ink-soft); letter-spacing: .02em; transform: translateX(-50%); white-space: nowrap; }
+.door-label {
+  position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%); white-space: nowrap;
+  font-size: max(9px, 1.4cqw); color: #6E4A3E; font-weight: 600;
+}
+.zone {
+  position: absolute; transform: translateX(-50%); white-space: nowrap;
+  font-size: max(9px, 1.4cqw); color: #4F3D31; background: rgba(255, 255, 255, .72); border-radius: 999px; padding: .1em .7em;
+}
 .zone .dot { margin-inline-end: 4px; vertical-align: middle; }
 
 .tbl {
@@ -175,30 +230,59 @@ h1 .gold { color: var(--lead); }
   border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 50%;
   transition: transform .25s ease, filter .25s ease, opacity .25s ease;
 }
+/* white tablecloth with a ring of flowers in the table's colour around the number */
 .tbl .glass {
-  position: absolute; inset: 16%; border-radius: 50%; display: grid; place-content: center; text-align: center;
-  border: 2px solid var(--lead);
+  position: absolute; inset: 19%; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 38% 32%, var(--h-cloth) 0 35%, var(--h-cloth-2) 64%, var(--h-cloth-3) 100%);
+  box-shadow: 0 3px 7px rgba(60, 35, 20, .30), inset 0 0 0 1px rgba(170, 140, 100, .35);
+}
+.tbl .glass::before {
+  content: ""; position: absolute; inset: 10%; border-radius: 50%;
   background:
-    radial-gradient(circle at 35% 30%, color-mix(in srgb, white 45%, transparent), transparent 55%),
-    color-mix(in srgb, var(--c) 28%, var(--surface));
-  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--c) 55%, transparent);
+    radial-gradient(circle at 50% 14%, var(--c) 0 9%, transparent 10%),
+    radial-gradient(circle at 81% 32%, var(--c) 0 9%, transparent 10%),
+    radial-gradient(circle at 81% 68%, var(--c) 0 9%, transparent 10%),
+    radial-gradient(circle at 50% 86%, var(--c) 0 9%, transparent 10%),
+    radial-gradient(circle at 19% 68%, var(--c) 0 9%, transparent 10%),
+    radial-gradient(circle at 19% 32%, var(--c) 0 9%, transparent 10%),
+    radial-gradient(circle at 68% 19%, #FFF7F0 0 7%, transparent 8%),
+    radial-gradient(circle at 86% 50%, #FFF7F0 0 7%, transparent 8%),
+    radial-gradient(circle at 68% 81%, #FFF7F0 0 7%, transparent 8%),
+    radial-gradient(circle at 32% 81%, #FFF7F0 0 7%, transparent 8%),
+    radial-gradient(circle at 14% 50%, #FFF7F0 0 7%, transparent 8%),
+    radial-gradient(circle at 32% 19%, #FFF7F0 0 7%, transparent 8%),
+    radial-gradient(circle, transparent 0 24%, var(--h-green) 25% 42%, transparent 43%);
 }
-.tbl .tn { font-family: var(--f-display); font-weight: 700; font-size: max(10px, 2.15cqw); line-height: 1.1; color: var(--ink); }
-.tbl .tc { font-size: max(8px, 1.3cqw); color: var(--ink-soft); font-variant-numeric: tabular-nums; line-height: 1.2; }
-.tbl.full .glass { box-shadow: inset 0 0 0 3px var(--c); }
+.tbl .tn {
+  position: relative; display: grid; place-items: center; width: 2.3em; height: 2.3em; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #FFFFFF, #F1E6D4); border: 1.5px solid var(--h-gold);
+  font-family: var(--f-display); font-weight: 700; font-size: max(10px, 2.1cqw); line-height: 1; color: var(--h-text);
+}
+.tbl .tc {
+  position: absolute; left: 50%; top: 97%; transform: translateX(-50%); white-space: nowrap; line-height: 1.5;
+  font-size: max(8px, 1.25cqw); color: #4A3A2E; background: rgba(255, 255, 255, .85); border-radius: 999px; padding: 0 .55em;
+  font-variant-numeric: tabular-nums;
+}
+.tbl.full .tc { background: var(--h-gold); color: #FFFFFF; }
+/* gold chairs: ivory cushion when free, the family side's colour when taken; back faces away from the table */
 .tbl .seat {
-  position: absolute; width: 15%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%);
-  border: 1.5px solid var(--lead-soft); background: var(--surface);
+  position: absolute; width: 15%; height: 13%; border-radius: 30% 30% 22% 22%;
+  background: var(--h-ivory); border: 1.5px solid var(--h-gold); box-shadow: 0 1px 2px rgba(60, 35, 20, .3);
 }
-.tbl .seat.groom { background: var(--groom); border-color: var(--groom); }
-.tbl .seat.bride { background: var(--bride); border-color: var(--bride); }
-.tbl .seat.friends { background: var(--friends); border-color: var(--friends); }
+.tbl .seat::after {
+  content: ""; position: absolute; left: -10%; right: -10%; top: -34%; height: 30%;
+  background: var(--h-gold); border-radius: 3px;
+}
+.tbl .seat.groom { background: var(--groom); }
+.tbl .seat.bride { background: var(--bride); }
+.tbl .seat.friends { background: var(--friends); }
 .tbl:hover { filter: brightness(1.04); }
-.tbl.sel .glass { border-color: var(--accent); border-width: 3px; }
+.tbl.sel .glass { box-shadow: 0 0 0 3px var(--accent), 0 3px 7px rgba(60, 35, 20, .30); }
 .hall.picking .tbl.fits { animation: breathe 1.6s ease-in-out infinite; }
 .hall.picking .tbl.nofit { opacity: .35; }
 .tbl.over { transform: translate(-50%, -50%) scale(1.12); }
-.tbl.over.nofit-now .glass { border-color: var(--danger); }
+.tbl.over .glass { box-shadow: 0 0 0 3px var(--groom), 0 3px 7px rgba(60, 35, 20, .30); }
+.tbl.over.nofit-now .glass { box-shadow: 0 0 0 3px var(--danger), 0 3px 7px rgba(60, 35, 20, .30); }
 .tbl.pop { animation: pop .45s ease; }
 .tbl.shake { animation: shake .4s ease; }
 @keyframes breathe { 50% { transform: translate(-50%, -50%) scale(1.06); } }
@@ -230,15 +314,38 @@ h1 .gold { color: var(--lead); }
 .rule { height: 1px; background: linear-gradient(90deg, transparent, var(--lead), transparent); border: 0; margin: 2px 0; }
 .screen h3 { margin: 0; font-size: 16px; font-weight: 600; text-align: center; }
 .screen p { margin: 0; font-size: 13px; color: var(--ink-soft); text-align: center; }
-.screen form { display: grid; gap: 8px; }
-.screen input { width: 100%; border: 1px solid var(--lead-soft); background: var(--surface); border-radius: 14px; padding: 11px 14px; outline: none; font-size: 15px; }
-.screen input:focus { border-color: var(--lead); }
-.sugg { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.sugg button { width: 100%; text-align: start; border: 0; background: var(--surface); border-radius: 10px; padding: 9px 12px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; gap: 8px; }
-.sugg button:hover { background: var(--surface-2); }
-.sugg .fam { font-size: 11px; color: var(--ink-soft); }
-.miss { font-size: 13px; color: var(--danger); text-align: center; }
 .screen .btn { justify-content: center; }
+/* pick-your-name list */
+.screen.pick { overflow: hidden; gap: 10px; }
+.letters { display: flex; gap: 5px; overflow-x: auto; flex: none; padding: 2px 0 4px; scrollbar-width: none; }
+.letters::-webkit-scrollbar { display: none; }
+.letters button {
+  flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--lead-soft); background: var(--surface);
+  font-family: var(--f-display); font-size: 15px; line-height: 1; cursor: pointer; padding: 0;
+}
+.letters button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.pick-list {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; position: relative; overscroll-behavior: contain;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.grp-h {
+  position: sticky; top: 0; z-index: 1; background: var(--paper); font-family: var(--f-display); font-weight: 700;
+  color: var(--lead); font-size: 18px; line-height: 1; padding: 8px 4px 4px;
+}
+.nm-row {
+  width: 100%; display: flex; align-items: center; gap: 10px; text-align: start; border: 0; border-bottom: 1px solid var(--line);
+  background: transparent; padding: 9px 4px; cursor: pointer;
+}
+.nm-row:hover { background: var(--surface); }
+.nm-row .chk {
+  width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--lead); flex: none;
+  display: grid; place-items: center; font-size: 11px; font-weight: 700; color: transparent;
+}
+.nm-row[aria-checked="true"] { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.nm-row[aria-checked="true"] .chk { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.nm-row .nm2 { flex: 1; min-width: 0; font-size: 14px; display: grid; }
+.nm-row .fam { font-size: 11px; color: var(--ink-soft); }
+.pick-go { flex: none; }
 .back { align-self: center; border: 0; background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 13px; text-decoration: underline; }
 
 .card {
@@ -250,7 +357,7 @@ h1 .gold { color: var(--lead); }
   user-select: none; -webkit-user-select: none;
 }
 .card .k { font-size: 12px; color: var(--ink-soft); letter-spacing: .04em; }
-.card .t { font-family: var(--f-display); font-size: 46px; font-weight: 700; line-height: 1.15; color: var(--c, var(--accent)); }
+.card .t { font-family: var(--f-display); font-size: 64px; font-weight: 700; line-height: 1.15; color: var(--c, var(--accent)); }
 .card .where { font-size: 13px; color: var(--ink); }
 .card canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; transition: opacity .6s ease; }
 .card canvas.gone { opacity: 0; pointer-events: none; }
@@ -331,7 +438,7 @@ h1 .gold { color: var(--lead); }
   <header class="top">
     <div class="brand"><span class="logo" lang="en" dir="ltr">Ajwaa</span><span class="tag">ترتيب المعازيم</span></div>
     <h1>كل ضيف يلاقي مكانه <span class="gold">في ثانية</span></h1>
-    <p class="lede">من ردود المعازيم على الدعوة، بتقسّم الترابيزات بالسحب. ويوم الفرح كل ضيف يكتب اسمه على موبايله، يخربش الكارت، ويعرف ترابيزته والطريق ليها.</p>
+    <p class="lede">من ردود المعازيم على الدعوة، بتقسّم الترابيزات بالسحب. ويوم الفرح كل ضيف يختار اسمه من القايمة على موبايله، يخربش الكارت، ويعرف ترابيزته والطريق ليها.</p>
     <nav class="switch" aria-label="أجزاء التجربة">
       <a href="#planner" id="tab-planner"><span class="n">١</span>ترتيب القاعة</a>
       <a href="#guest" id="tab-guest"><span class="n">٢</span>تجربة الضيف</a>
@@ -375,14 +482,14 @@ h1 .gold { color: var(--lead); }
     <div class="phone"><div class="screen" id="screen"></div></div>
     <div class="notes">
       <h2>على باب القاعة: QR صغير، ومن غير طوابير</h2>
-      <p>الضيف بيفتح اللينك من موبايله من غير أي تطبيق. بيكتب اسمه، يخربش الكارت عشان يكشف ترابيزته، والخريطة توريه طريقه من الباب.</p>
+      <p>الضيف بيفتح اللينك من موبايله من غير أي تطبيق. بيدوّر على اسمه في القايمة ويختاره، يخربش الكارت عشان يكشف ترابيزته، والخريطة توريه طريقه من الباب.</p>
       <div class="try">
         <span class="lbl">جرّب بنفسك بأسماء من المثال:</span>
         <div class="chips" id="try"></div>
       </div>
       <ul class="points">
         <li>أي تعديل تعمله في ترتيب القاعة بيظهر عند الضيف على طول.</li>
-        <li>الاسم بيتلاقي حتى لو اتكتب "احمد" من غير همزة أو "هدي" بدل "هدى".</li>
+        <li>مفيش كتابة: الأسماء مترتبة بالحروف، والضيف يدوس على الحرف ويلاقي اسمه في ثانية.</li>
         <li>نفس ألوان وخطوط الدعوة، فالتجربة كلها شبه بعض من أول الدعوة لحد الترابيزة.</li>
       </ul>
     </div>
@@ -412,18 +519,19 @@ h1 .gold { color: var(--lead); }
   var SIDES = { groom: "عيلة العريس", bride: "عيلة العروسة", friends: "الأصحاب" };
   // positions are % of the hall (x from the left, y from the top); zone = which side sits there
   var TABLES = [
-    { id: "t1", name: "سَكَن", zone: "groom", x: 72, y: 30, c: "--glass-4" },
-    { id: "t2", name: "مودّة", zone: "groom", x: 88, y: 30, c: "--glass-1" },
-    { id: "t3", name: "رحمة", zone: "groom", x: 72, y: 54, c: "--glass-3" },
-    { id: "t4", name: "أُلفة", zone: "groom", x: 88, y: 54, c: "--glass-5" },
-    { id: "t5", name: "نور", zone: "bride", x: 28, y: 30, c: "--glass-2" },
-    { id: "t6", name: "ريحان", zone: "bride", x: 12, y: 30, c: "--glass-3" },
-    { id: "t7", name: "ياسمين", zone: "bride", x: 28, y: 54, c: "--glass-6" },
-    { id: "t8", name: "لؤلؤ", zone: "bride", x: 12, y: 54, c: "--glass-5" },
-    { id: "t9", name: "بهجة", zone: "friends", x: 33, y: 80, c: "--glass-1" },
-    { id: "t10", name: "سَنا", zone: "friends", x: 14, y: 80, c: "--glass-4" },
-    { id: "t11", name: "وِصال", zone: "friends", x: 67, y: 80, c: "--glass-2" },
-    { id: "t12", name: "فيروز", zone: "friends", x: 86, y: 80, c: "--glass-6" }
+    // numbered from the stage, right to left, row by row
+    { id: "t1", name: "٢", zone: "groom", x: 72, y: 30, c: "--glass-4" },
+    { id: "t2", name: "١", zone: "groom", x: 88, y: 30, c: "--glass-1" },
+    { id: "t3", name: "٦", zone: "groom", x: 72, y: 54, c: "--glass-3" },
+    { id: "t4", name: "٥", zone: "groom", x: 88, y: 54, c: "--glass-5" },
+    { id: "t5", name: "٣", zone: "bride", x: 28, y: 30, c: "--glass-2" },
+    { id: "t6", name: "٤", zone: "bride", x: 12, y: 30, c: "--glass-3" },
+    { id: "t7", name: "٧", zone: "bride", x: 28, y: 54, c: "--glass-6" },
+    { id: "t8", name: "٨", zone: "bride", x: 12, y: 54, c: "--glass-5" },
+    { id: "t9", name: "١١", zone: "friends", x: 33, y: 80, c: "--glass-1" },
+    { id: "t10", name: "١٢", zone: "friends", x: 14, y: 80, c: "--glass-4" },
+    { id: "t11", name: "١٠", zone: "friends", x: 67, y: 80, c: "--glass-2" },
+    { id: "t12", name: "٩", zone: "friends", x: 86, y: 80, c: "--glass-6" }
   ];
   var ZONE_LABELS = [
     { side: "groom", x: 80, y: 16.5 }, { side: "bride", x: 20, y: 16.5 }, { side: "friends", x: 50, y: 70 }
@@ -547,8 +655,14 @@ h1 .gold { color: var(--lead); }
   function buildHall(el, opts) {
     opts = opts || {};
     el.textContent = "";
+    var aisle = document.createElement("div"); aisle.className = "aisle"; el.appendChild(aisle);
     var stage = document.createElement("div");
-    stage.className = "stage"; stage.textContent = "الكوشة";
+    stage.className = "stage";
+    ["backdrop", "sofa", "lbl"].forEach(function (k) {
+      var part = document.createElement("span"); part.className = k;
+      if (k === "lbl") part.textContent = "الكوشة";
+      stage.appendChild(part);
+    });
     el.appendChild(stage);
     var floor = document.createElement("div");
     floor.className = "floor"; floor.textContent = "ساحة الرقص";
@@ -581,14 +695,15 @@ h1 .gold { color: var(--lead); }
         var a = (i / CAP) * Math.PI * 2 - Math.PI / 2;
         var s = document.createElement("span");
         s.className = "seat" + (sides[i] ? " " + sides[i] : "");
-        s.style.left = (50 + 43 * Math.cos(a)) + "%";
-        s.style.top = (50 + 43 * Math.sin(a)) + "%";
+        s.style.left = (50 + 41 * Math.cos(a)) + "%";
+        s.style.top = (50 + 41 * Math.sin(a)) + "%";
+        s.style.transform = "translate(-50%, -50%) rotate(" + (a * 180 / Math.PI + 90) + "deg)";
         b.appendChild(s);
       }
       var g = document.createElement("span"); g.className = "glass";
       var tn = document.createElement("span"); tn.className = "tn"; tn.textContent = t.name;
       var tc = document.createElement("span"); tc.className = "tc"; tc.textContent = ar(load) + "/" + ar(CAP);
-      g.appendChild(tn); g.appendChild(tc); b.appendChild(g);
+      g.appendChild(tn); b.appendChild(g); b.appendChild(tc);
       el.appendChild(b);
     });
   }
@@ -681,7 +796,7 @@ h1 .gold { color: var(--lead); }
     var t = tableById[state.openTable];
     var card = document.createElement("div"); card.className = "table-card";
     var head = document.createElement("header");
-    var h = document.createElement("h3"); h.textContent = t.name;
+    var h = document.createElement("h3"); h.textContent = "ترابيزة " + t.name;
     var cap = document.createElement("span"); cap.className = "cap"; cap.textContent = ar(loadOf(t.id)) + " من " + ar(CAP) + " كراسي";
     var close = document.createElement("button"); close.type = "button"; close.className = "close"; close.textContent = "اقفل";
     close.addEventListener("click", function () { state.openTable = null; renderAll(); });
@@ -891,49 +1006,59 @@ h1 .gold { color: var(--lead); }
     return w;
   }
 
-  function showSearch(prefill) {
-    var s = screenEl(); s.textContent = "";
+  // every guest name, A–Z by first name, grouped under its first letter (أ/إ/آ count as ا)
+  var SORTED = NAMES.slice().sort(function (a, b) { return a.name.localeCompare(b.name, "ar"); });
+  function letterOf(x) { return x.n.charAt(0); }
+  var SHOW_LETTER = { "ا": "أ" };
+
+  function showSearch() {
+    var s = screenEl(); s.textContent = ""; s.className = "screen pick"; s.scrollTop = 0;
     s.appendChild(couple());
-    var hr = document.createElement("hr"); hr.className = "rule"; s.appendChild(hr);
-    var h = document.createElement("h3"); h.textContent = "أهلاً بيك! اكتب اسمك"; s.appendChild(h);
-    var p = document.createElement("p"); p.textContent = "وهنقولك قاعد فين."; s.appendChild(p);
-    var f = document.createElement("form"); f.autocomplete = "off";
-    var inp = document.createElement("input"); inp.type = "text"; inp.id = "guest-name"; inp.placeholder = "مثلاً: هدى شاكر"; inp.setAttribute("aria-label", "اسمك");
-    var ul = document.createElement("ul"); ul.className = "sugg";
-    var miss = document.createElement("div"); miss.className = "miss"; miss.setAttribute("role", "status");
-    var go = document.createElement("button"); go.type = "submit"; go.className = "btn"; go.textContent = "ورّيني مكاني";
-    f.appendChild(inp); f.appendChild(ul); f.appendChild(miss); f.appendChild(go);
-    s.appendChild(f);
-    var matches = [];
-    function update() {
-      var q = norm(inp.value);
-      miss.textContent = "";
-      ul.textContent = "";
-      matches = q.length < 2 ? [] : NAMES.filter(function (x) { return x.n.indexOf(q) !== -1; }).slice(0, 4);
-      matches.forEach(function (m) {
-        var li = document.createElement("li"), b = document.createElement("button");
-        b.type = "button";
-        var nm = document.createElement("span"); nm.textContent = m.name;
-        var fam = document.createElement("span"); fam.className = "fam"; fam.textContent = byId[m.pid].title;
-        b.appendChild(nm); b.appendChild(fam);
-        b.addEventListener("click", function () { showReveal(m); });
-        li.appendChild(b); ul.appendChild(li);
+    var h = document.createElement("h3"); h.textContent = "أهلاً بيك! اختار اسمك"; s.appendChild(h);
+    var p = document.createElement("p"); p.textContent = "دوّر على اسمك في القايمة ودوس عليه."; s.appendChild(p);
+
+    var letters = document.createElement("div"); letters.className = "letters"; letters.setAttribute("aria-label", "الحروف");
+    var list = document.createElement("div"); list.className = "pick-list"; list.setAttribute("role", "radiogroup"); list.setAttribute("aria-label", "أسماء المعازيم");
+    var go = document.createElement("button"); go.type = "button"; go.className = "btn pick-go"; go.textContent = "ورّيني مكاني"; go.disabled = true;
+
+    var chosen = null, groups = {};
+    SORTED.forEach(function (m) {
+      var L = letterOf(m);
+      if (!groups[L]) {
+        var gh = document.createElement("div"); gh.className = "grp-h"; gh.textContent = SHOW_LETTER[L] || L;
+        list.appendChild(gh); groups[L] = gh;
+        var lb = document.createElement("button"); lb.type = "button"; lb.textContent = SHOW_LETTER[L] || L;
+        lb.setAttribute("aria-label", "الأسماء اللي بتبدأ بحرف " + (SHOW_LETTER[L] || L));
+        lb.addEventListener("click", function () {
+          list.scrollTop = gh.offsetTop;
+          letters.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === lb); });
+        });
+        letters.appendChild(lb);
+      }
+      var row = document.createElement("button");
+      row.type = "button"; row.className = "nm-row"; row.setAttribute("role", "radio"); row.setAttribute("aria-checked", "false");
+      var chk = document.createElement("span"); chk.className = "chk"; chk.textContent = "✓"; chk.setAttribute("aria-hidden", "true");
+      var txt = document.createElement("span"); txt.className = "nm2";
+      var nm = document.createElement("span"); nm.textContent = m.name;
+      var fam = document.createElement("span"); fam.className = "fam"; fam.textContent = byId[m.pid].title;
+      txt.appendChild(nm); txt.appendChild(fam);
+      row.appendChild(chk); row.appendChild(txt);
+      row.addEventListener("click", function () {
+        list.querySelectorAll(".nm-row").forEach(function (x) { x.setAttribute("aria-checked", x === row ? "true" : "false"); });
+        chosen = m;
+        go.disabled = false;
+        go.textContent = "ورّيني مكاني يا " + m.name.split(" ")[0];
       });
-    }
-    inp.addEventListener("input", update);
-    f.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var q = norm(inp.value);
-      var exact = NAMES.find(function (x) { return x.n === q; });
-      if (exact) return showReveal(exact);
-      if (matches.length === 1) return showReveal(matches[0]);
-      miss.textContent = q.length < 2 ? "اكتب اسمك الأول." : matches.length ? "اختار اسمك من القايمة." : "مش لاقيين الاسم ده. جرّب تكتبه تاني أو اسأل حد من المنظمين.";
+      row.addEventListener("dblclick", function () { showReveal(m); });
+      list.appendChild(row);
     });
-    if (prefill) { inp.value = prefill; update(); }
+    go.addEventListener("click", function () { if (chosen) showReveal(chosen); });
+
+    s.appendChild(letters); s.appendChild(list); s.appendChild(go);
   }
 
   function showReveal(m) {
-    var s = screenEl(); s.textContent = ""; s.scrollTop = 0;
+    var s = screenEl(); s.textContent = ""; s.className = "screen"; s.scrollTop = 0;
     var p = byId[m.pid];
     var tid = state.assign[p.id];
     var first = m.name.split(" ")[0];
@@ -952,7 +1077,7 @@ h1 .gold { color: var(--lead); }
     var t = tableById[tid];
     var card = document.createElement("div"); card.className = "card";
     card.style.setProperty("--c", "var(" + t.c + ")");
-    var k = document.createElement("div"); k.className = "k"; k.textContent = "ترابيزتك";
+    var k = document.createElement("div"); k.className = "k"; k.textContent = "ترابيزتك رقم";
     var tn = document.createElement("div"); tn.className = "t"; tn.textContent = t.name;
     var wh = document.createElement("div"); wh.className = "where"; wh.textContent = whereText(t);
     card.appendChild(k); card.appendChild(tn); card.appendChild(wh);
