@@ -1,0 +1,1090 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Ajwaa Seating</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Ballet&display=swap">
+<style>
+/* Layout: compact brand header → live hall planner (hall + guest list) → guest phone experience → three-step process → contact.
+   Stained-glass wedding stationery: blush paper, gold "lead" lines, jewel-tone glass tables. */
+:root {
+  --paper: #F4E7E3;
+  --surface: #FCF7F4;
+  --surface-2: #EFDCD7;
+  --ink: #2B1820;
+  --ink-soft: #6C5560;
+  --line: rgba(43, 24, 32, .13);
+  --lead: #A9864A;
+  --lead-soft: rgba(169, 134, 74, .35);
+  --accent: #6A0A33;
+  --accent-ink: #FCF7F4;
+  --groom: #566B32;
+  --bride: #A3285E;
+  --friends: #A9864A;
+  --glass-1: #6A0A33;
+  --glass-2: #C0737B;
+  --glass-3: #8B9C5C;
+  --glass-4: #566B32;
+  --glass-5: #B8935A;
+  --glass-6: #8E1450;
+  --danger: #B0303A;
+  --floor: rgba(169, 134, 74, .07);
+  --shadow: 0 18px 40px -24px rgba(60, 20, 35, .45);
+  --f-display: "Aref Ruqaa", "Amiri", "Traditional Arabic", serif;
+  --f-body: "Alexandria", "Segoe UI", Tahoma, sans-serif;
+  --f-latin: "Ballet", "Snell Roundhand", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1A1115; --surface: #241820; --surface-2: #30212A; --ink: #F4E7E3; --ink-soft: #C2A9B2;
+    --line: rgba(244, 231, 227, .14); --lead: #D4B176; --lead-soft: rgba(212, 177, 118, .35);
+    --accent: #E58DAA; --accent-ink: #1A1115; --groom: #A3BA70; --bride: #EE8CB4; --friends: #D4B176;
+    --glass-1: #B83A6B; --glass-2: #D9939A; --glass-3: #A8B97A; --glass-4: #7E9A4C; --glass-5: #D4B176; --glass-6: #C2457F;
+    --danger: #F07A82; --floor: rgba(212, 177, 118, .06); --shadow: 0 18px 40px -24px rgba(0, 0, 0, .8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1A1115; --surface: #241820; --surface-2: #30212A; --ink: #F4E7E3; --ink-soft: #C2A9B2;
+  --line: rgba(244, 231, 227, .14); --lead: #D4B176; --lead-soft: rgba(212, 177, 118, .35);
+  --accent: #E58DAA; --accent-ink: #1A1115; --groom: #A3BA70; --bride: #EE8CB4; --friends: #D4B176;
+  --glass-1: #B83A6B; --glass-2: #D9939A; --glass-3: #A8B97A; --glass-4: #7E9A4C; --glass-5: #D4B176; --glass-6: #C2457F;
+  --danger: #F07A82; --floor: rgba(212, 177, 118, .06); --shadow: 0 18px 40px -24px rgba(0, 0, 0, .8);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+button, input { font: inherit; color: inherit; }
+.app {
+  max-width: 1200px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+  display: grid; gap: 28px;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+.top { display: grid; gap: 14px; }
+.brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.brand .logo { font-family: var(--f-latin); font-size: 38px; line-height: 1; color: var(--accent); }
+.brand .tag { font-size: 12px; letter-spacing: .08em; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(36px, 6vw, 60px); line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 .gold { color: var(--lead); }
+.lede { margin: 0; max-width: 62ch; color: var(--ink-soft); font-size: 16px; }
+.switch { display: inline-flex; background: var(--surface-2); border-radius: 999px; padding: 4px; gap: 4px; justify-self: start; flex-wrap: wrap; }
+.switch a {
+  text-decoration: none; padding: 9px 18px; border-radius: 999px; font-weight: 500; font-size: 14px; color: var(--ink-soft);
+  display: inline-flex; gap: 8px; align-items: center;
+}
+.switch a .n { font-size: 12px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; border: 1px solid currentColor; }
+.switch a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+.sample-note { font-size: 13px; color: var(--ink-soft); margin: 0; }
+.sample-note b { color: var(--ink); font-weight: 600; }
+
+/* planner */
+.planner { display: grid; gap: 16px; }
+.bar { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; justify-content: space-between; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; padding: 0; list-style: none; }
+.stats li { display: flex; align-items: baseline; gap: 6px; font-size: 13px; color: var(--ink-soft); }
+.stats b { font-size: 22px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.stats li.wait b { color: var(--bride); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+  border: 1px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 999px; padding: 9px 18px;
+  font-weight: 500; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--ink-soft); }
+.btn:disabled { opacity: .5; cursor: default; }
+
+.board { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); gap: 18px; align-items: start; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.panel h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.hint { margin: 0; font-size: 13px; color: var(--ink-soft); }
+.search { width: 100%; border: 1px solid var(--line); background: var(--paper); border-radius: 12px; padding: 9px 12px; outline: none; }
+.search:focus { border-color: var(--lead); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 4px 12px; font-size: 13px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; color: var(--ink-soft);
+}
+.chip[aria-pressed="true"] { background: var(--surface-2); color: var(--ink); border-color: var(--ink-soft); }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
+.dot.groom { background: var(--groom); } .dot.bride { background: var(--bride); } .dot.friends { background: var(--friends); }
+.list { display: grid; gap: 6px; max-height: 560px; overflow: auto; padding: 2px; margin: 0 -2px; }
+.party {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; text-align: start;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 9px 12px; cursor: grab;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; width: 100%;
+}
+.party:hover { border-color: var(--lead-soft); }
+.party .who { min-width: 0; }
+.party .nm { display: block; font-weight: 500; font-size: 14px; overflow-wrap: anywhere; }
+.party .sub { display: block; font-size: 12px; color: var(--ink-soft); }
+.party .size { font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; background: var(--surface-2); border-radius: 999px; padding: 2px 10px; }
+.party.seated { opacity: .55; }
+.party.seated .sub b { color: var(--ink); font-weight: 500; }
+.party.selected { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent); opacity: 1; }
+.list .empty { font-size: 13px; color: var(--ink-soft); padding: 14px 4px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--ink-soft); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+.table-card { border: 1px solid var(--lead-soft); border-radius: 16px; padding: 12px; display: grid; gap: 8px; background: var(--paper); }
+.table-card header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.table-card h3 { margin: 0; font-family: var(--f-display); font-size: 24px; font-weight: 700; }
+.table-card .cap { font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.table-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.table-card li { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; }
+.table-card li .x { border: 0; background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 12px; text-decoration: underline; padding: 2px 4px; }
+.table-card .close { border: 0; background: transparent; cursor: pointer; color: var(--ink-soft); font-size: 13px; }
+
+/* hall */
+.hall-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 14px; box-shadow: var(--shadow); min-width: 0; }
+.hall {
+  position: relative; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; container-type: inline-size;
+  border-radius: 14px; border: 1.5px solid var(--lead-soft);
+  background:
+    repeating-linear-gradient(45deg, var(--floor) 0 12px, transparent 12px 24px),
+    var(--paper);
+  overflow: hidden;
+}
+.stage {
+  position: absolute; left: 33%; width: 34%; top: 2.5%; height: 10%;
+  border: 1.5px solid var(--lead); border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  display: grid; place-items: center; font-family: var(--f-display); font-size: max(11px, 2.4cqw); color: var(--lead);
+  background: color-mix(in srgb, var(--lead) 10%, transparent);
+}
+.floor {
+  position: absolute; left: 38%; width: 24%; top: 30%; height: 34%; border-radius: 12px;
+  border: 1px dashed var(--lead-soft); display: grid; place-items: center; text-align: center;
+  font-size: max(9px, 1.5cqw); color: var(--ink-soft);
+  background: repeating-linear-gradient(90deg, transparent 0 9%, var(--floor) 9% 10%);
+}
+.door {
+  position: absolute; left: 44%; width: 12%; bottom: 0; height: 2.6%; background: var(--lead);
+  border-radius: 6px 6px 0 0;
+}
+.door-label { position: absolute; left: 50%; bottom: 3.5%; transform: translateX(-50%); font-size: max(9px, 1.4cqw); color: var(--ink-soft); white-space: nowrap; }
+.zone { position: absolute; font-size: max(9px, 1.45cqw); color: var(--ink-soft); letter-spacing: .02em; transform: translateX(-50%); white-space: nowrap; }
+.zone .dot { margin-inline-end: 4px; vertical-align: middle; }
+
+.tbl {
+  position: absolute; width: 13%; aspect-ratio: 1; transform: translate(-50%, -50%);
+  border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 50%;
+  transition: transform .25s ease, filter .25s ease, opacity .25s ease;
+}
+.tbl .glass {
+  position: absolute; inset: 16%; border-radius: 50%; display: grid; place-content: center; text-align: center;
+  border: 2px solid var(--lead);
+  background:
+    radial-gradient(circle at 35% 30%, color-mix(in srgb, white 45%, transparent), transparent 55%),
+    color-mix(in srgb, var(--c) 28%, var(--surface));
+  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--c) 55%, transparent);
+}
+.tbl .tn { font-family: var(--f-display); font-weight: 700; font-size: max(10px, 2.15cqw); line-height: 1.1; color: var(--ink); }
+.tbl .tc { font-size: max(8px, 1.3cqw); color: var(--ink-soft); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.tbl.full .glass { box-shadow: inset 0 0 0 3px var(--c); }
+.tbl .seat {
+  position: absolute; width: 15%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%);
+  border: 1.5px solid var(--lead-soft); background: var(--surface);
+}
+.tbl .seat.groom { background: var(--groom); border-color: var(--groom); }
+.tbl .seat.bride { background: var(--bride); border-color: var(--bride); }
+.tbl .seat.friends { background: var(--friends); border-color: var(--friends); }
+.tbl:hover { filter: brightness(1.04); }
+.tbl.sel .glass { border-color: var(--accent); border-width: 3px; }
+.hall.picking .tbl.fits { animation: breathe 1.6s ease-in-out infinite; }
+.hall.picking .tbl.nofit { opacity: .35; }
+.tbl.over { transform: translate(-50%, -50%) scale(1.12); }
+.tbl.over.nofit-now .glass { border-color: var(--danger); }
+.tbl.pop { animation: pop .45s ease; }
+.tbl.shake { animation: shake .4s ease; }
+@keyframes breathe { 50% { transform: translate(-50%, -50%) scale(1.06); } }
+@keyframes pop { 40% { transform: translate(-50%, -50%) scale(1.18); } }
+@keyframes shake { 25% { transform: translate(-56%, -50%); } 75% { transform: translate(-44%, -50%); } }
+
+.drag-label {
+  position: fixed; z-index: 50; pointer-events: none; transform: translate(-50%, -120%);
+  background: var(--ink); color: var(--paper); padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;
+  box-shadow: var(--shadow); white-space: nowrap;
+}
+
+/* guest view */
+.guest { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 40px; align-items: center; }
+.phone {
+  width: 100%; max-width: 340px; justify-self: center; aspect-ratio: 9 / 18.5; border-radius: 44px; padding: 12px;
+  background: linear-gradient(160deg, #3a2a31, #120b0e); box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.08);
+  position: relative;
+}
+.phone::before { content: ""; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 34%; height: 20px; background: #0c0709; border-radius: 999px; z-index: 3; }
+.screen {
+  position: relative; width: 100%; height: 100%; border-radius: 34px; overflow: hidden; background: var(--paper);
+  display: flex; flex-direction: column; padding: 52px 18px 18px; gap: 14px; overflow-y: auto;
+}
+.screen .couple { text-align: center; display: grid; gap: 2px; }
+.screen .couple .names { font-family: var(--f-display); font-size: 30px; font-weight: 700; line-height: 1.2; }
+.screen .couple .names .amp { color: var(--lead); font-size: 22px; padding-inline: 4px; }
+.screen .couple .when { font-size: 12px; color: var(--ink-soft); }
+.rule { height: 1px; background: linear-gradient(90deg, transparent, var(--lead), transparent); border: 0; margin: 2px 0; }
+.screen h3 { margin: 0; font-size: 16px; font-weight: 600; text-align: center; }
+.screen p { margin: 0; font-size: 13px; color: var(--ink-soft); text-align: center; }
+.screen form { display: grid; gap: 8px; }
+.screen input { width: 100%; border: 1px solid var(--lead-soft); background: var(--surface); border-radius: 14px; padding: 11px 14px; outline: none; font-size: 15px; }
+.screen input:focus { border-color: var(--lead); }
+.sugg { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.sugg button { width: 100%; text-align: start; border: 0; background: var(--surface); border-radius: 10px; padding: 9px 12px; cursor: pointer; font-size: 14px; display: flex; justify-content: space-between; gap: 8px; }
+.sugg button:hover { background: var(--surface-2); }
+.sugg .fam { font-size: 11px; color: var(--ink-soft); }
+.miss { font-size: 13px; color: var(--danger); text-align: center; }
+.screen .btn { justify-content: center; }
+.back { align-self: center; border: 0; background: transparent; color: var(--ink-soft); cursor: pointer; font-size: 13px; text-decoration: underline; }
+
+.card {
+  position: relative; border-radius: 22px; overflow: hidden; border: 2px solid var(--lead); min-height: 168px;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--c, var(--glass-1)) 22%, transparent), transparent 70%),
+    var(--surface);
+  display: grid; place-content: center; text-align: center; padding: 18px; gap: 2px;
+  user-select: none; -webkit-user-select: none;
+}
+.card .k { font-size: 12px; color: var(--ink-soft); letter-spacing: .04em; }
+.card .t { font-family: var(--f-display); font-size: 46px; font-weight: 700; line-height: 1.15; color: var(--c, var(--accent)); }
+.card .where { font-size: 13px; color: var(--ink); }
+.card canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; transition: opacity .6s ease; }
+.card canvas.gone { opacity: 0; pointer-events: none; }
+.after { display: grid; gap: 10px; transition: opacity .5s ease; }
+.after[data-hidden="true"] { opacity: 0; visibility: hidden; }
+.mini { position: relative; }
+.mini .hall { border-radius: 12px; }
+.mini .tbl { cursor: default; }
+.mini .tbl .tc, .mini .tbl .seat { display: none; }
+.mini .tbl:not(.you) .tn { display: none; }
+.mini .tbl:not(.you) .glass { opacity: .45; }
+.mini .tbl.you { animation: breathe 1.8s ease-in-out infinite; z-index: 2; }
+.mini .tbl.you .glass { border-width: 3px; }
+.route { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.route path { fill: none; stroke: var(--accent); stroke-width: 1.1; stroke-dasharray: 2 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.route path.draw { animation: dash 1.2s linear infinite; }
+.route circle { fill: var(--accent); }
+@keyframes dash { to { stroke-dashoffset: -7.2; } }
+.with { font-size: 12px; color: var(--ink-soft); text-align: center; }
+.with b { color: var(--ink); font-weight: 500; }
+.reveal-now { justify-self: center; border: 0; background: transparent; color: var(--ink-soft); font-size: 12px; text-decoration: underline; cursor: pointer; }
+
+.notes { display: grid; gap: 18px; min-width: 0; }
+.notes h2 { font-family: var(--f-display); font-size: clamp(28px, 4vw, 40px); margin: 0; line-height: 1.2; text-wrap: balance; }
+.notes p { margin: 0; color: var(--ink-soft); max-width: 58ch; }
+.try { display: grid; gap: 8px; }
+.try .lbl { font-size: 13px; font-weight: 600; }
+.points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.points li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; font-size: 14px; }
+.points li::before { content: "✦"; color: var(--lead); font-size: 16px; line-height: 1.5; }
+
+/* process + contact */
+.process { border-top: 1px solid var(--line); padding-top: 28px; display: grid; gap: 18px; }
+.process h2 { margin: 0; font-family: var(--f-display); font-size: clamp(26px, 3.6vw, 36px); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 6px; align-content: start; }
+.steps li::before {
+  content: counter(s, arabic-indic); font-family: var(--f-display); font-size: 34px; line-height: 1; color: var(--lead);
+}
+.steps b { font-weight: 600; }
+.steps span { color: var(--ink-soft); font-size: 14px; }
+.cta {
+  display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
+  background: var(--ink); color: var(--paper); border-radius: 26px; padding: 26px 28px;
+}
+.cta p { margin: 0; font-size: 18px; max-width: 46ch; }
+.cta p .latin { font-family: var(--f-latin); font-size: 30px; color: var(--lead); padding-inline: 4px; }
+.cta a {
+  background: var(--paper); color: var(--ink); text-decoration: none; border-radius: 999px; padding: 11px 22px; font-weight: 600; white-space: nowrap;
+}
+
+.toast {
+  position: fixed; z-index: 60; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px);
+  background: var(--ink); color: var(--paper); padding: 10px 18px; border-radius: 999px; font-size: 14px;
+  opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; max-width: calc(100% - 32px); text-align: center;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.bad { background: var(--danger); color: #fff; }
+
+@media (max-width: 900px) {
+  .board { grid-template-columns: minmax(0, 1fr); }
+  .board .hall-wrap { order: -1; }
+  .list { max-height: 420px; }
+  .guest { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .hall-wrap { padding: 8px; border-radius: 16px; }
+  .tbl { width: 14.5%; }
+  .zone { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<div class="app" dir="rtl" lang="ar">
+  <header class="top">
+    <div class="brand"><span class="logo" lang="en" dir="ltr">Ajwaa</span><span class="tag">ترتيب المعازيم</span></div>
+    <h1>كل ضيف يلاقي مكانه <span class="gold">في ثانية</span></h1>
+    <p class="lede">من ردود المعازيم على الدعوة، بتقسّم الترابيزات بالسحب. ويوم الفرح كل ضيف يكتب اسمه على موبايله، يخربش الكارت، ويعرف ترابيزته والطريق ليها.</p>
+    <nav class="switch" aria-label="أجزاء التجربة">
+      <a href="#planner" id="tab-planner"><span class="n">١</span>ترتيب القاعة</a>
+      <a href="#guest" id="tab-guest"><span class="n">٢</span>تجربة الضيف</a>
+    </nav>
+    <p class="sample-note">بيانات تجريبية لفرح <b>يوسف وليلى</b>: ٢٩ عيلة أكدوا حضورهم من الدعوة.</p>
+  </header>
+
+  <!-- 1 · planner -->
+  <section class="planner" id="view-planner" aria-label="ترتيب القاعة">
+    <div class="bar">
+      <ul class="stats" id="stats"></ul>
+      <div class="actions">
+        <button class="btn" type="button" id="auto">رتّب الباقي تلقائي</button>
+        <button class="btn ghost" type="button" id="clear">فضّي القاعة</button>
+        <button class="btn ghost" type="button" id="restore">رجّع المثال</button>
+      </div>
+    </div>
+    <div class="board">
+      <aside class="panel" aria-label="المعازيم">
+        <div id="table-card-slot"></div>
+        <h2>المعازيم اللي أكدوا</h2>
+        <p class="hint" id="hint">اسحب العيلة على ترابيزة، أو دوس عليها وبعدين دوس على الترابيزة.</p>
+        <input class="search" id="q" type="search" placeholder="دوّر باسم أو عيلة" aria-label="دوّر في المعازيم">
+        <div class="chips" role="group" aria-label="فلتر">
+          <button class="chip" type="button" data-f="all" aria-pressed="true">الكل</button>
+          <button class="chip" type="button" data-f="groom" aria-pressed="false"><span class="dot groom"></span>عيلة العريس</button>
+          <button class="chip" type="button" data-f="bride" aria-pressed="false"><span class="dot bride"></span>عيلة العروسة</button>
+          <button class="chip" type="button" data-f="friends" aria-pressed="false"><span class="dot friends"></span>الأصحاب</button>
+        </div>
+        <div class="list" id="list"></div>
+        <div class="legend"><span><span class="dot groom"></span>عيلة العريس</span><span><span class="dot bride"></span>عيلة العروسة</span><span><span class="dot friends"></span>الأصحاب</span></div>
+      </aside>
+      <div class="hall-wrap">
+        <div class="hall" id="hall" aria-label="خريطة القاعة"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · guest -->
+  <section class="guest" id="view-guest" aria-label="تجربة الضيف" hidden>
+    <div class="phone"><div class="screen" id="screen"></div></div>
+    <div class="notes">
+      <h2>على باب القاعة: QR صغير، ومن غير طوابير</h2>
+      <p>الضيف بيفتح اللينك من موبايله من غير أي تطبيق. بيكتب اسمه، يخربش الكارت عشان يكشف ترابيزته، والخريطة توريه طريقه من الباب.</p>
+      <div class="try">
+        <span class="lbl">جرّب بنفسك بأسماء من المثال:</span>
+        <div class="chips" id="try"></div>
+      </div>
+      <ul class="points">
+        <li>أي تعديل تعمله في ترتيب القاعة بيظهر عند الضيف على طول.</li>
+        <li>الاسم بيتلاقي حتى لو اتكتب "احمد" من غير همزة أو "هدي" بدل "هدى".</li>
+        <li>نفس ألوان وخطوط الدعوة، فالتجربة كلها شبه بعض من أول الدعوة لحد الترابيزة.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="process" aria-label="الخطوات">
+    <h2>بيمشي إزاي في فرحك</h2>
+    <ol class="steps">
+      <li><b>المعازيم يأكدوا من الدعوة</b><span>كل رد بيوصل بعدد الأفراد وأسمائهم، وطرفهم: عيلة العريس أو العروسة أو أصحاب.</span></li>
+      <li><b>إنت تقسّم الترابيزات</b><span>بالسحب أو بزرار "رتّب تلقائي"، وكل عيلة تفضل قاعدة مع بعض.</span></li>
+      <li><b>يوم الفرح</b><span>QR على الباب، والضيف يعرف مكانه من موبايله في ثواني.</span></li>
+    </ol>
+    <div class="cta">
+      <p>عايز التجربة دي في فرحك مع دعوة <span class="latin" lang="en" dir="ltr">Ajwaa</span>؟</p>
+      <a href="https://www.instagram.com/ajwaa.eg_26/?hl=en" target="_blank" rel="noopener">كلّمنا على إنستجرام</a>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var CAP = 10;
+  var SIDES = { groom: "عيلة العريس", bride: "عيلة العروسة", friends: "الأصحاب" };
+  // positions are % of the hall (x from the left, y from the top); zone = which side sits there
+  var TABLES = [
+    { id: "t1", name: "سَكَن", zone: "groom", x: 72, y: 30, c: "--glass-4" },
+    { id: "t2", name: "مودّة", zone: "groom", x: 88, y: 30, c: "--glass-1" },
+    { id: "t3", name: "رحمة", zone: "groom", x: 72, y: 54, c: "--glass-3" },
+    { id: "t4", name: "أُلفة", zone: "groom", x: 88, y: 54, c: "--glass-5" },
+    { id: "t5", name: "نور", zone: "bride", x: 28, y: 30, c: "--glass-2" },
+    { id: "t6", name: "ريحان", zone: "bride", x: 12, y: 30, c: "--glass-3" },
+    { id: "t7", name: "ياسمين", zone: "bride", x: 28, y: 54, c: "--glass-6" },
+    { id: "t8", name: "لؤلؤ", zone: "bride", x: 12, y: 54, c: "--glass-5" },
+    { id: "t9", name: "بهجة", zone: "friends", x: 33, y: 80, c: "--glass-1" },
+    { id: "t10", name: "سَنا", zone: "friends", x: 14, y: 80, c: "--glass-4" },
+    { id: "t11", name: "وِصال", zone: "friends", x: 67, y: 80, c: "--glass-2" },
+    { id: "t12", name: "فيروز", zone: "friends", x: 86, y: 80, c: "--glass-6" }
+  ];
+  var ZONE_LABELS = [
+    { side: "groom", x: 80, y: 16.5 }, { side: "bride", x: 20, y: 16.5 }, { side: "friends", x: 50, y: 70 }
+  ];
+  // prio 1 = close family (seated nearest the stage)
+  var PARTIES = [
+    { id: "g1", side: "groom", prio: 1, title: "أبو وأم العريس", m: ["سامي منصور", "نجلاء منصور"] },
+    { id: "g2", side: "groom", prio: 1, title: "عيلة أحمد منصور", m: ["أحمد منصور", "منى منصور", "كريم منصور", "سلمى منصور"] },
+    { id: "g3", side: "groom", prio: 1, title: "عيلة هشام منصور", m: ["هشام منصور", "دينا هشام", "مالك هشام"] },
+    { id: "g4", side: "groom", prio: 1, title: "عيلة طارق عبد العزيز", m: ["طارق عبد العزيز", "رانيا طارق", "ياسين طارق", "فريدة طارق", "آدم طارق"] },
+    { id: "g5", side: "groom", prio: 1, title: "الحاجة فاطمة منصور", m: ["فاطمة منصور"] },
+    { id: "g6", side: "groom", prio: 2, title: "عيلة محمود شاكر", m: ["محمود شاكر", "هدى شاكر", "عمر شاكر"] },
+    { id: "g7", side: "groom", prio: 2, title: "عيلة وليد رمضان", m: ["وليد رمضان", "ريم وليد", "جنى وليد", "حمزة وليد"] },
+    { id: "g8", side: "groom", prio: 2, title: "عيلة شريف الدسوقي", m: ["شريف الدسوقي", "نهى الدسوقي"] },
+    { id: "g9", side: "groom", prio: 2, title: "عيلة عادل فهمي", m: ["عادل فهمي", "سوزان فهمي", "نادين عادل"] },
+    { id: "g10", side: "groom", prio: 2, title: "عيلة إيهاب نصر", m: ["إيهاب نصر", "منة إيهاب", "سيف إيهاب", "ليلى إيهاب", "زياد إيهاب", "يحيى إيهاب"] },
+    { id: "g11", side: "groom", prio: 3, title: "د. رامي الحسيني", m: ["رامي الحسيني", "ياسمين الحسيني"] },
+    { id: "b1", side: "bride", prio: 1, title: "أبو وأم العروسة", m: ["خالد الشافعي", "هالة الشافعي"] },
+    { id: "b2", side: "bride", prio: 1, title: "عيلة مصطفى الشافعي", m: ["مصطفى الشافعي", "إيمان مصطفى", "نور مصطفى", "علي مصطفى"] },
+    { id: "b3", side: "bride", prio: 1, title: "عيلة حسام الشافعي", m: ["حسام الشافعي", "ريهام حسام", "تيا حسام"] },
+    { id: "b4", side: "bride", prio: 1, title: "عيلة أشرف سليمان", m: ["أشرف سليمان", "غادة أشرف", "مريم أشرف", "يوسف أشرف"] },
+    { id: "b5", side: "bride", prio: 1, title: "الحاجة سعاد الشافعي", m: ["سعاد الشافعي", "عزة الشافعي"] },
+    { id: "b6", side: "bride", prio: 2, title: "عيلة تامر الجندي", m: ["تامر الجندي", "شيماء الجندي", "لارا تامر"] },
+    { id: "b7", side: "bride", prio: 2, title: "عيلة مجدي حلمي", m: ["مجدي حلمي", "نيفين حلمي", "هنا مجدي", "عمر مجدي", "سارة مجدي"] },
+    { id: "b8", side: "bride", prio: 2, title: "عيلة باسم عزت", m: ["باسم عزت", "رشا عزت"] },
+    { id: "b9", side: "bride", prio: 2, title: "عيلة ناصر فؤاد", m: ["ناصر فؤاد", "أمل فؤاد", "ملك ناصر", "جودي ناصر"] },
+    { id: "b10", side: "bride", prio: 3, title: "أ. عفاف البنا", m: ["عفاف البنا", "دعاء البنا", "ولاء البنا"] },
+    { id: "f1", side: "friends", prio: 2, title: "أصحاب العريس من الشغل", m: ["مازن عاطف", "كريم سمير", "أحمد ياسر", "محمد عصام", "عمرو جلال"] },
+    { id: "f2", side: "friends", prio: 2, title: "أصحاب العريس من الجامعة", m: ["حازم فتحي", "مصطفى ماهر", "يوسف حسن", "شادي نبيل"] },
+    { id: "f3", side: "friends", prio: 2, title: "أصحاب العروسة من المدرسة", m: ["رنا فاروق", "ميار عادل", "هبة رأفت", "سلمى حاتم", "ندى خليل", "آية سعيد"] },
+    { id: "f4", side: "friends", prio: 2, title: "أصحاب العروسة من الشغل", m: ["منة الله طه", "دينا مراد", "بسنت علاء"] },
+    { id: "f5", side: "friends", prio: 3, title: "عيلة أحمد الصاوي", m: ["أحمد الصاوي", "لمياء الصاوي", "تميم أحمد"] },
+    { id: "f6", side: "friends", prio: 3, title: "عيلة كريم نور الدين", m: ["كريم نور الدين", "ياسمين نور الدين"] },
+    { id: "f7", side: "friends", prio: 3, title: "م. هاني رشدي", m: ["هاني رشدي", "سمر رشدي"] },
+    { id: "f8", side: "friends", prio: 3, title: "عيلة عمرو البحيري", m: ["عمرو البحيري", "مروة البحيري", "فارس عمرو", "جنا عمرو"] }
+  ];
+  // parties left unseated in the opening example so there is something to arrange
+  var START_UNSEATED = ["g10", "g11", "b9", "b10", "f3", "f6", "f7", "f8"];
+  var STORE = "ajwaa-seating-demo-v1";
+
+  var byId = {};
+  PARTIES.forEach(function (p) { p.size = p.m.length; byId[p.id] = p; });
+  var tableById = {};
+  TABLES.forEach(function (t) { tableById[t.id] = t; });
+  var TOTAL = PARTIES.reduce(function (s, p) { return s + p.size; }, 0);
+
+  var $ = function (id) { return document.getElementById(id); };
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ar = function (n) { return Number(n).toLocaleString("ar-EG"); };
+
+  var state = { assign: {}, picked: null, openTable: null, filter: "all", q: "" };
+
+  // ---------- persistence (per-viewer convenience) ----------
+  function save() { try { localStorage.setItem(STORE, JSON.stringify(state.assign)); } catch (e) {} }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE);
+      if (!raw) return null;
+      var a = JSON.parse(raw), ok = {};
+      Object.keys(a).forEach(function (k) { if (byId[k] && tableById[a[k]]) ok[k] = a[k]; });
+      return ok;
+    } catch (e) { return null; }
+  }
+
+  // ---------- seating logic ----------
+  function loadOf(tid, assign) {
+    assign = assign || state.assign;
+    var s = 0;
+    for (var pid in assign) if (assign[pid] === tid) s += byId[pid].size;
+    return s;
+  }
+  function partiesAt(tid) {
+    return PARTIES.filter(function (p) { return state.assign[p.id] === tid; });
+  }
+  function dist(a, x, y) { return Math.hypot(a.x - x, a.y - y); }
+  var STAGE = { x: 50, y: 7 };
+  var ZONE_CENTER = { groom: { x: 80, y: 42 }, bride: { x: 20, y: 42 }, friends: { x: 50, y: 80 } };
+
+  // Seats every unseated party: close family first and nearest the stage, each side in its own zone,
+  // overflow to the nearest table with room. Families are never split.
+  function planAuto(base) {
+    var assign = Object.assign({}, base);
+    var loads = {};
+    TABLES.forEach(function (t) { loads[t.id] = loadOf(t.id, assign); });
+    var todo = PARTIES.filter(function (p) { return !assign[p.id]; })
+      .sort(function (a, b) { return a.prio - b.prio || b.size - a.size; });
+    var steps = [], left = [];
+    todo.forEach(function (p) {
+      var zone = TABLES.filter(function (t) { return t.zone === p.side; })
+        .sort(function (a, b) { return dist(a, STAGE.x, STAGE.y) - dist(b, STAGE.x, STAGE.y); });
+      var t = zone.find(function (t) { return loads[t.id] + p.size <= CAP; });
+      if (!t) {
+        var c = ZONE_CENTER[p.side];
+        t = TABLES.filter(function (t) { return loads[t.id] + p.size <= CAP; })
+          .sort(function (a, b) { return dist(a, c.x, c.y) - dist(b, c.x, c.y); })[0];
+      }
+      if (t) { assign[p.id] = t.id; loads[t.id] += p.size; steps.push([p.id, t.id]); }
+      else left.push(p);
+    });
+    return { assign: assign, steps: steps, left: left };
+  }
+
+  function sampleAssign() {
+    var full = planAuto({}).assign;
+    START_UNSEATED.forEach(function (id) { delete full[id]; });
+    return full;
+  }
+
+  // ---------- toast ----------
+  var toastTimer;
+  function toast(msg, bad) {
+    var el = $("toast");
+    el.textContent = msg;
+    el.classList.toggle("bad", !!bad);
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2600);
+  }
+
+  // ---------- hall rendering (also used for the guest's mini map) ----------
+  function buildHall(el, opts) {
+    opts = opts || {};
+    el.textContent = "";
+    var stage = document.createElement("div");
+    stage.className = "stage"; stage.textContent = "الكوشة";
+    el.appendChild(stage);
+    var floor = document.createElement("div");
+    floor.className = "floor"; floor.textContent = "ساحة الرقص";
+    el.appendChild(floor);
+    var door = document.createElement("div"); door.className = "door"; el.appendChild(door);
+    var dl = document.createElement("div"); dl.className = "door-label"; dl.textContent = "المدخل"; el.appendChild(dl);
+    if (!opts.mini) {
+      ZONE_LABELS.forEach(function (z) {
+        var lab = document.createElement("div");
+        lab.className = "zone";
+        lab.style.left = z.x + "%"; lab.style.top = z.y + "%";
+        var d = document.createElement("span"); d.className = "dot " + z.side;
+        lab.appendChild(d); lab.appendChild(document.createTextNode(SIDES[z.side]));
+        el.appendChild(lab);
+      });
+    }
+    TABLES.forEach(function (t) {
+      var load = loadOf(t.id);
+      var b = document.createElement(opts.mini ? "div" : "button");
+      if (!opts.mini) b.type = "button";
+      b.className = "tbl" + (load >= CAP ? " full" : "") + (state.openTable === t.id && !opts.mini ? " sel" : "") + (opts.you === t.id ? " you" : "");
+      b.dataset.tid = t.id;
+      b.style.left = t.x + "%"; b.style.top = t.y + "%";
+      b.style.setProperty("--c", "var(" + t.c + ")");
+      if (!opts.mini) b.setAttribute("aria-label", "ترابيزة " + t.name + "، " + ar(load) + " من " + ar(CAP));
+      // seat dots, coloured by the side of whoever sits there
+      var sides = [];
+      partiesAt(t.id).forEach(function (p) { for (var i = 0; i < p.size; i++) sides.push(p.side); });
+      for (var i = 0; i < CAP; i++) {
+        var a = (i / CAP) * Math.PI * 2 - Math.PI / 2;
+        var s = document.createElement("span");
+        s.className = "seat" + (sides[i] ? " " + sides[i] : "");
+        s.style.left = (50 + 43 * Math.cos(a)) + "%";
+        s.style.top = (50 + 43 * Math.sin(a)) + "%";
+        b.appendChild(s);
+      }
+      var g = document.createElement("span"); g.className = "glass";
+      var tn = document.createElement("span"); tn.className = "tn"; tn.textContent = t.name;
+      var tc = document.createElement("span"); tc.className = "tc"; tc.textContent = ar(load) + "/" + ar(CAP);
+      g.appendChild(tn); g.appendChild(tc); b.appendChild(g);
+      el.appendChild(b);
+    });
+  }
+
+  function markFits() {
+    var hall = $("hall");
+    var p = state.picked ? byId[state.picked] : null;
+    hall.classList.toggle("picking", !!p);
+    hall.querySelectorAll(".tbl").forEach(function (b) {
+      b.classList.remove("fits", "nofit");
+      if (!p) return;
+      var room = CAP - loadOf(b.dataset.tid) + (state.assign[p.id] === b.dataset.tid ? p.size : 0);
+      b.classList.add(room >= p.size ? "fits" : "nofit");
+    });
+  }
+
+  // ---------- planner rendering ----------
+  function seatedCount() {
+    var n = 0;
+    for (var pid in state.assign) n += byId[pid].size;
+    return n;
+  }
+  function renderStats() {
+    var seated = seatedCount();
+    var full = TABLES.filter(function (t) { return loadOf(t.id) >= CAP; }).length;
+    var items = [
+      ["", ar(TOTAL), "ضيف أكدوا"],
+      ["", ar(seated), "اتقعدوا"],
+      [TOTAL - seated ? "wait" : "", ar(TOTAL - seated), "لسه من غير مكان"],
+      ["", ar(full) + " من " + ar(TABLES.length), "ترابيزات كاملة"]
+    ];
+    var ul = $("stats"); ul.textContent = "";
+    items.forEach(function (it) {
+      var li = document.createElement("li"); if (it[0]) li.className = it[0];
+      var b = document.createElement("b"); b.textContent = it[1];
+      li.appendChild(b); li.appendChild(document.createTextNode(it[2]));
+      ul.appendChild(li);
+    });
+    $("auto").disabled = seated === TOTAL;
+  }
+
+  function norm(s) {
+    return String(s || "")
+      .replace(new RegExp("[" + String.fromCharCode(0x64B) + "-" + String.fromCharCode(0x652) + String.fromCharCode(0x670) + String.fromCharCode(0x640) + "]", "g"), "")
+      .replace(/[أإآٱ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").replace(/ؤ/g, "و").replace(/ئ/g, "ي")
+      .replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
+  function renderList() {
+    var q = norm(state.q);
+    var rows = PARTIES.filter(function (p) {
+      if (state.filter !== "all" && p.side !== state.filter) return false;
+      if (!q) return true;
+      return norm(p.title).indexOf(q) !== -1 || p.m.some(function (n) { return norm(n).indexOf(q) !== -1; });
+    }).sort(function (a, b) {
+      return (!!state.assign[a.id] - !!state.assign[b.id]) || a.prio - b.prio;
+    });
+    var list = $("list"); list.textContent = "";
+    if (!rows.length) {
+      var e = document.createElement("div"); e.className = "empty"; e.textContent = "مفيش عيلة بالاسم ده.";
+      list.appendChild(e); return;
+    }
+    rows.forEach(function (p) {
+      var tid = state.assign[p.id];
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "party" + (tid ? " seated" : "") + (state.picked === p.id ? " selected" : "");
+      b.dataset.id = p.id;
+      b.setAttribute("aria-pressed", state.picked === p.id ? "true" : "false");
+      var d = document.createElement("span"); d.className = "dot " + p.side;
+      var who = document.createElement("span"); who.className = "who";
+      var nm = document.createElement("span"); nm.className = "nm"; nm.textContent = p.title;
+      var sub = document.createElement("span"); sub.className = "sub";
+      if (tid) {
+        sub.appendChild(document.createTextNode("على ترابيزة "));
+        var tb = document.createElement("b"); tb.textContent = tableById[tid].name; sub.appendChild(tb);
+      } else {
+        sub.textContent = p.m.slice(0, 2).join("، ") + (p.size > 2 ? "…" : "");
+      }
+      who.appendChild(nm); who.appendChild(sub);
+      var sz = document.createElement("span"); sz.className = "size"; sz.textContent = ar(p.size);
+      b.appendChild(d); b.appendChild(who); b.appendChild(sz);
+      list.appendChild(b);
+    });
+  }
+
+  function renderTableCard() {
+    var slot = $("table-card-slot"); slot.textContent = "";
+    if (!state.openTable) return;
+    var t = tableById[state.openTable];
+    var card = document.createElement("div"); card.className = "table-card";
+    var head = document.createElement("header");
+    var h = document.createElement("h3"); h.textContent = t.name;
+    var cap = document.createElement("span"); cap.className = "cap"; cap.textContent = ar(loadOf(t.id)) + " من " + ar(CAP) + " كراسي";
+    var close = document.createElement("button"); close.type = "button"; close.className = "close"; close.textContent = "اقفل";
+    close.addEventListener("click", function () { state.openTable = null; renderAll(); });
+    var hl = document.createElement("div"); hl.appendChild(h); hl.appendChild(cap);
+    head.appendChild(hl); head.appendChild(close); card.appendChild(head);
+    var ps = partiesAt(t.id);
+    if (!ps.length) {
+      var e = document.createElement("p"); e.className = "hint"; e.textContent = "الترابيزة فاضية. اختار عيلة من القايمة ودوس هنا.";
+      card.appendChild(e);
+    } else {
+      var ul = document.createElement("ul");
+      ps.forEach(function (p) {
+        var li = document.createElement("li");
+        var l = document.createElement("span");
+        var d = document.createElement("span"); d.className = "dot " + p.side; d.style.marginInlineEnd = "6px";
+        l.appendChild(d); l.appendChild(document.createTextNode(p.title + " (" + ar(p.size) + ")"));
+        var x = document.createElement("button"); x.type = "button"; x.className = "x"; x.textContent = "شيلهم";
+        x.addEventListener("click", function () { unassign(p.id); });
+        li.appendChild(l); li.appendChild(x); ul.appendChild(li);
+      });
+      card.appendChild(ul);
+    }
+    slot.appendChild(card);
+  }
+
+  function renderAll() {
+    buildHall($("hall"));
+    markFits();
+    renderStats();
+    renderList();
+    renderTableCard();
+  }
+
+  function flash(tid, cls) {
+    var b = $("hall").querySelector('.tbl[data-tid="' + tid + '"]');
+    if (!b) return;
+    b.classList.remove(cls); void b.offsetWidth; b.classList.add(cls);
+  }
+
+  // ---------- actions ----------
+  function assign(pid, tid) {
+    var p = byId[pid], t = tableById[tid];
+    var room = CAP - loadOf(tid) + (state.assign[pid] === tid ? p.size : 0);
+    if (state.assign[pid] === tid) { state.picked = null; renderAll(); return; }
+    if (room < p.size) {
+      flash(tid, "shake");
+      toast(room
+        ? "ترابيزة " + t.name + " فاضل فيها " + ar(room) + " كراسي بس، و" + p.title + " " + ar(p.size) + " أفراد."
+        : "ترابيزة " + t.name + " مليانة.", true);
+      return;
+    }
+    state.assign[pid] = tid;
+    state.picked = null;
+    save(); renderAll(); flash(tid, "pop");
+    toast(p.title + " على ترابيزة " + t.name);
+  }
+  function unassign(pid) {
+    delete state.assign[pid];
+    save(); renderAll();
+  }
+
+  var running = false;
+  $("auto").addEventListener("click", function () {
+    if (running) return;
+    var plan = planAuto(state.assign);
+    if (!plan.steps.length) {
+      toast(plan.left.length ? "مفيش ترابيزة فيها مكان كفاية للباقيين." : "كل المعازيم قاعدين.", !!plan.left.length);
+      return;
+    }
+    state.picked = null; state.openTable = null;
+    var done = function () {
+      running = false; $("auto").disabled = seatedCount() === TOTAL;
+      var n = plan.steps.reduce(function (s, st) { return s + byId[st[0]].size; }, 0);
+      toast(plan.left.length
+        ? "اتقعد " + ar(n) + " ضيف. فاضل " + ar(plan.left.length) + " عيلة محتاجين ترابيزة زيادة."
+        : "اتقعد " + ar(n) + " ضيف، وكل عيلة مع بعض.", !!plan.left.length);
+    };
+    if (reduceMotion) {
+      state.assign = plan.assign; save(); renderAll(); done(); return;
+    }
+    running = true; $("auto").disabled = true;
+    var i = 0;
+    (function next() {
+      if (i >= plan.steps.length) { save(); done(); return; }
+      var st = plan.steps[i++];
+      state.assign[st[0]] = st[1];
+      renderAll(); flash(st[1], "pop");
+      setTimeout(next, 140);
+    })();
+  });
+  $("clear").addEventListener("click", function () {
+    if (running) return;
+    state.assign = {}; state.picked = null; state.openTable = null; save(); renderAll();
+    toast("القاعة فاضية. جرّب \"رتّب الباقي تلقائي\".");
+  });
+  $("restore").addEventListener("click", function () {
+    if (running) return;
+    state.assign = sampleAssign(); state.picked = null; state.openTable = null; save(); renderAll();
+    toast("رجعنا للمثال.");
+  });
+
+  $("q").addEventListener("input", function (e) { state.q = e.target.value; renderList(); });
+  document.querySelectorAll(".chip[data-f]").forEach(function (c) {
+    c.addEventListener("click", function () {
+      state.filter = c.dataset.f;
+      document.querySelectorAll(".chip[data-f]").forEach(function (x) { x.setAttribute("aria-pressed", x === c ? "true" : "false"); });
+      renderList();
+    });
+  });
+
+  // hall clicks: place the picked family, or open the table's card
+  $("hall").addEventListener("click", function (e) {
+    var b = e.target.closest(".tbl");
+    if (!b) return;
+    if (state.picked) { assign(state.picked, b.dataset.tid); return; }
+    state.openTable = state.openTable === b.dataset.tid ? null : b.dataset.tid;
+    renderAll();
+  });
+
+  // drag from the list onto a table; a plain tap picks the family instead
+  var drag = null, ghost = null, overEl = null;
+  function tableAt(x, y) {
+    var el = document.elementFromPoint(x, y);
+    return el && el.closest ? el.closest("#hall .tbl") : null;
+  }
+  function setOver(el) {
+    if (overEl === el) return;
+    if (overEl) overEl.classList.remove("over", "nofit-now");
+    overEl = el;
+    if (el && drag) {
+      var p = byId[drag.pid];
+      var room = CAP - loadOf(el.dataset.tid) + (state.assign[p.id] === el.dataset.tid ? p.size : 0);
+      el.classList.add("over");
+      if (room < p.size) el.classList.add("nofit-now");
+    }
+  }
+  $("list").addEventListener("pointerdown", function (e) {
+    var el = e.target.closest(".party");
+    if (!el || (e.pointerType === "mouse" && e.button !== 0)) return;
+    drag = { pid: el.dataset.id, x0: e.clientX, y0: e.clientY, moved: false, el: el, id: e.pointerId };
+  });
+  window.addEventListener("pointermove", function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) > 6) {
+      drag.moved = true;
+      try { drag.el.setPointerCapture(e.pointerId); } catch (err) {}
+      ghost = document.createElement("div"); ghost.className = "drag-label";
+      ghost.textContent = byId[drag.pid].title + " · " + ar(byId[drag.pid].size);
+      document.body.appendChild(ghost);
+      state.picked = drag.pid; markFits();
+    }
+    if (drag.moved) {
+      e.preventDefault();
+      ghost.style.left = e.clientX + "px"; ghost.style.top = e.clientY + "px";
+      setOver(tableAt(e.clientX, e.clientY));
+    }
+  });
+  function endDrag(e, cancelled) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var d = drag; drag = null;
+    if (ghost) { ghost.remove(); ghost = null; }
+    var over = overEl; setOver(null);
+    if (!d.moved) return;          // a tap: handled by the click listener
+    d.el.dataset.dragged = "1";
+    if (!cancelled && over) { assign(d.pid, over.dataset.tid); }
+    else { state.picked = null; markFits(); renderList(); }
+  }
+  window.addEventListener("pointerup", function (e) { endDrag(e, false); });
+  window.addEventListener("pointercancel", function (e) { endDrag(e, true); });
+  $("list").addEventListener("click", function (e) {
+    var el = e.target.closest(".party");
+    if (!el) return;
+    if (el.dataset.dragged) { delete el.dataset.dragged; return; }
+    var pid = el.dataset.id;
+    state.picked = state.picked === pid ? null : pid;
+    state.openTable = null;
+    renderAll();
+    if (state.picked) {
+      var p = byId[pid];
+      toast((state.assign[pid] ? "انقل " : "اختار ترابيزة لـ") + p.title + " (" + ar(p.size) + ")");
+      if (window.innerWidth <= 900) $("hall").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && (state.picked || state.openTable)) { state.picked = null; state.openTable = null; renderAll(); }
+  });
+
+  // ---------- guest experience ----------
+  var NAMES = [];
+  PARTIES.forEach(function (p) { p.m.forEach(function (n) { NAMES.push({ name: n, n: norm(n), pid: p.id }); }); });
+
+  function whereText(t) {
+    var depth = t.y < 40 ? "قريبة من الكوشة" : t.y < 70 ? "في نص القاعة" : "قريبة من المدخل";
+    var side = t.x > 60 ? "على اليمين" : t.x < 40 ? "على الشمال" : "في النص";
+    return depth + "، " + side;
+  }
+
+  function screenEl() { return $("screen"); }
+  function couple() {
+    var w = document.createElement("div"); w.className = "couple";
+    var n = document.createElement("div"); n.className = "names";
+    n.appendChild(document.createTextNode("يوسف"));
+    var a = document.createElement("span"); a.className = "amp"; a.textContent = "و"; n.appendChild(a);
+    n.appendChild(document.createTextNode("ليلى"));
+    var d = document.createElement("div"); d.className = "when"; d.textContent = "الجمعة ٤ ديسمبر ٢٠٢٦";
+    w.appendChild(n); w.appendChild(d);
+    return w;
+  }
+
+  function showSearch(prefill) {
+    var s = screenEl(); s.textContent = "";
+    s.appendChild(couple());
+    var hr = document.createElement("hr"); hr.className = "rule"; s.appendChild(hr);
+    var h = document.createElement("h3"); h.textContent = "أهلاً بيك! اكتب اسمك"; s.appendChild(h);
+    var p = document.createElement("p"); p.textContent = "وهنقولك قاعد فين."; s.appendChild(p);
+    var f = document.createElement("form"); f.autocomplete = "off";
+    var inp = document.createElement("input"); inp.type = "text"; inp.id = "guest-name"; inp.placeholder = "مثلاً: هدى شاكر"; inp.setAttribute("aria-label", "اسمك");
+    var ul = document.createElement("ul"); ul.className = "sugg";
+    var miss = document.createElement("div"); miss.className = "miss"; miss.setAttribute("role", "status");
+    var go = document.createElement("button"); go.type = "submit"; go.className = "btn"; go.textContent = "ورّيني مكاني";
+    f.appendChild(inp); f.appendChild(ul); f.appendChild(miss); f.appendChild(go);
+    s.appendChild(f);
+    var matches = [];
+    function update() {
+      var q = norm(inp.value);
+      miss.textContent = "";
+      ul.textContent = "";
+      matches = q.length < 2 ? [] : NAMES.filter(function (x) { return x.n.indexOf(q) !== -1; }).slice(0, 4);
+      matches.forEach(function (m) {
+        var li = document.createElement("li"), b = document.createElement("button");
+        b.type = "button";
+        var nm = document.createElement("span"); nm.textContent = m.name;
+        var fam = document.createElement("span"); fam.className = "fam"; fam.textContent = byId[m.pid].title;
+        b.appendChild(nm); b.appendChild(fam);
+        b.addEventListener("click", function () { showReveal(m); });
+        li.appendChild(b); ul.appendChild(li);
+      });
+    }
+    inp.addEventListener("input", update);
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var q = norm(inp.value);
+      var exact = NAMES.find(function (x) { return x.n === q; });
+      if (exact) return showReveal(exact);
+      if (matches.length === 1) return showReveal(matches[0]);
+      miss.textContent = q.length < 2 ? "اكتب اسمك الأول." : matches.length ? "اختار اسمك من القايمة." : "مش لاقيين الاسم ده. جرّب تكتبه تاني أو اسأل حد من المنظمين.";
+    });
+    if (prefill) { inp.value = prefill; update(); }
+  }
+
+  function showReveal(m) {
+    var s = screenEl(); s.textContent = ""; s.scrollTop = 0;
+    var p = byId[m.pid];
+    var tid = state.assign[p.id];
+    var first = m.name.split(" ")[0];
+    s.appendChild(couple());
+    var h = document.createElement("h3"); h.textContent = "أهلاً يا " + first + "، مكانك جاهز"; s.appendChild(h);
+
+    if (!tid) {
+      var card0 = document.createElement("div"); card0.className = "card";
+      var k0 = document.createElement("div"); k0.className = "k"; k0.textContent = "مكانك لسه بيتجهّز";
+      var w0 = document.createElement("div"); w0.className = "where"; w0.textContent = "حد من المنظمين هيوصلك لترابيزتك.";
+      card0.appendChild(k0); card0.appendChild(w0); s.appendChild(card0);
+      var tip = document.createElement("p"); tip.textContent = "في المثال: " + p.title + " لسه من غير ترابيزة. قعّدهم من \"ترتيب القاعة\" وارجع جرّب.";
+      s.appendChild(tip);
+      backBtn(s); return;
+    }
+    var t = tableById[tid];
+    var card = document.createElement("div"); card.className = "card";
+    card.style.setProperty("--c", "var(" + t.c + ")");
+    var k = document.createElement("div"); k.className = "k"; k.textContent = "ترابيزتك";
+    var tn = document.createElement("div"); tn.className = "t"; tn.textContent = t.name;
+    var wh = document.createElement("div"); wh.className = "where"; wh.textContent = whereText(t);
+    card.appendChild(k); card.appendChild(tn); card.appendChild(wh);
+    var cv = document.createElement("canvas"); cv.setAttribute("aria-label", "اخربش هنا عشان تكشف ترابيزتك");
+    card.appendChild(cv);
+    s.appendChild(card);
+
+    var now = document.createElement("button"); now.type = "button"; now.className = "reveal-now"; now.textContent = "اكشف من غير خربشة";
+    s.appendChild(now);
+
+    var after = document.createElement("div"); after.className = "after"; after.dataset.hidden = "true";
+    var mini = document.createElement("div"); mini.className = "mini";
+    var hall = document.createElement("div"); hall.className = "hall";
+    buildHall(hall, { mini: true, you: tid });
+    mini.appendChild(hall);
+    mini.appendChild(routeSvg(t));
+    after.appendChild(mini);
+    var mates = partiesAt(tid).filter(function (x) { return x.id !== p.id; });
+    var w = document.createElement("div"); w.className = "with";
+    if (mates.length) {
+      w.appendChild(document.createTextNode("معاكم على الترابيزة: "));
+      var b = document.createElement("b"); b.textContent = mates.map(function (x) { return x.title; }).join("، ");
+      w.appendChild(b);
+    } else {
+      w.textContent = "الترابيزة دي ليكم إنتم بس.";
+    }
+    after.appendChild(w);
+    s.appendChild(after);
+    backBtn(s);
+
+    var revealed = false;
+    function reveal() {
+      if (revealed) return; revealed = true;
+      cv.classList.add("gone"); now.remove();
+      after.dataset.hidden = "false";
+      setTimeout(function () { cv.remove(); }, 700);
+    }
+    now.addEventListener("click", reveal);
+    requestAnimationFrame(function () { scratch(cv, reveal); });
+  }
+
+  function backBtn(s) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "back"; b.textContent = "دوّر على اسم تاني";
+    b.addEventListener("click", function () { showSearch(); });
+    s.appendChild(b);
+  }
+
+  function routeSvg(t) {
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "route"); svg.setAttribute("viewBox", "0 0 100 75"); svg.setAttribute("preserveAspectRatio", "none");
+    svg.setAttribute("aria-hidden", "true");
+    var ty = t.y * 0.75, tx = t.x;
+    var edge = tx > 50 ? tx - 6.5 : tx + 6.5;   // stop at the table's rim
+    var path = document.createElementNS(NS, "path");
+    path.setAttribute("d", "M50 73.5 L50 " + ty + " L" + edge + " " + ty);
+    path.setAttribute("class", "draw");
+    path.setAttribute("vector-effect", "non-scaling-stroke");
+    var c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", "50"); c.setAttribute("cy", "73.5"); c.setAttribute("r", "1.6");
+    svg.appendChild(path); svg.appendChild(c);
+    return svg;
+  }
+
+  // gold foil scratch layer
+  function scratch(cv, onDone) {
+    var r = cv.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.max(1, Math.round(r.width * dpr)); cv.height = Math.max(1, Math.round(r.height * dpr));
+    var ctx = cv.getContext("2d");
+    var cs = getComputedStyle(document.documentElement);
+    var lead = cs.getPropertyValue("--lead").trim() || "#A9864A";
+    var grad = ctx.createLinearGradient(0, 0, cv.width, cv.height);
+    grad.addColorStop(0, lead); grad.addColorStop(.5, "#E9D3A3"); grad.addColorStop(1, lead);
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = "rgba(255,255,255,.35)";
+    for (var i = 0; i < 140; i++) { ctx.beginPath(); ctx.arc(Math.random() * cv.width, Math.random() * cv.height, Math.random() * 1.6 * dpr, 0, 7); ctx.fill(); }
+    ctx.fillStyle = "rgba(60,30,20,.75)";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = "600 " + Math.round(17 * dpr) + "px Alexandria, Tahoma, sans-serif";
+    ctx.direction = "rtl";
+    ctx.fillText("اخربش هنا ✦ واكشف ترابيزتك", cv.width / 2, cv.height / 2);
+    ctx.globalCompositeOperation = "destination-out";
+    var down = false, moves = 0, last = null;
+    function pt(e) { var b = cv.getBoundingClientRect(); return { x: (e.clientX - b.left) * dpr, y: (e.clientY - b.top) * dpr }; }
+    function rub(p) {
+      ctx.lineWidth = 46 * dpr; ctx.lineCap = "round";
+      ctx.beginPath();
+      if (last) { ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); }
+      ctx.arc(p.x, p.y, 23 * dpr, 0, 7); ctx.fill();
+      last = p;
+      if (++moves % 8 === 0 && cleared() > 0.45) onDone();
+    }
+    function cleared() {
+      var d = ctx.getImageData(0, 0, cv.width, cv.height).data, n = 0, c = 0;
+      for (var i = 3; i < d.length; i += 64) { n++; if (d[i] < 40) c++; }
+      return c / n;
+    }
+    cv.addEventListener("pointerdown", function (e) { down = true; last = null; try { cv.setPointerCapture(e.pointerId); } catch (x) {} rub(pt(e)); });
+    cv.addEventListener("pointermove", function (e) { if (down) rub(pt(e)); });
+    cv.addEventListener("pointerup", function () { down = false; last = null; if (cleared() > 0.45) onDone(); });
+    cv.addEventListener("pointercancel", function () { down = false; last = null; });
+  }
+
+  function renderTry() {
+    var box = $("try"); box.textContent = "";
+    ["هدى شاكر", "نور مصطفى", "مازن عاطف", "ملك ناصر"].forEach(function (n) {
+      var c = document.createElement("button"); c.type = "button"; c.className = "chip"; c.textContent = n;
+      c.addEventListener("click", function () {
+        var m = NAMES.find(function (x) { return x.name === n; });
+        if (m) showReveal(m);
+      });
+      box.appendChild(c);
+    });
+  }
+
+  // ---------- views (#planner / #guest) ----------
+  function route() {
+    var guest = location.hash === "#guest";
+    $("view-planner").hidden = guest;
+    $("view-guest").hidden = !guest;
+    $("tab-planner").setAttribute("aria-current", guest ? "false" : "page");
+    $("tab-guest").setAttribute("aria-current", guest ? "page" : "false");
+    if (guest) showSearch();
+    else renderAll();
+  }
+  window.addEventListener("hashchange", route);
+
+  state.assign = load() || sampleAssign();
+  renderTry();
+  route();
+})();
+</script>
+
+</body></html>
