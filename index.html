@@ -111,7 +111,7 @@ button, input { font: inherit; color: inherit; }
 }
 .chip[aria-pressed="true"] { background: var(--surface-2); color: var(--ink); border-color: var(--ink-soft); }
 .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
-.dot.groom { background: var(--groom); } .dot.bride { background: var(--bride); } .dot.friends { background: var(--friends); }
+.dot.groom { background: var(--groom); } .dot.bride { background: var(--bride); }
 .list { display: grid; gap: 6px; max-height: 560px; overflow: auto; padding: 2px; margin: 0 -2px; }
 .party {
   display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; text-align: start;
@@ -353,12 +353,11 @@ button, input { font: inherit; color: inherit; }
         <input class="search" id="q" type="search" placeholder="دوّر باسم أو عيلة" aria-label="دوّر في المعازيم">
         <div class="chips" role="group" aria-label="فلتر">
           <button class="chip" type="button" data-f="all" aria-pressed="true">الكل</button>
-          <button class="chip" type="button" data-f="groom" aria-pressed="false"><span class="dot groom"></span>عيلة العريس</button>
-          <button class="chip" type="button" data-f="bride" aria-pressed="false"><span class="dot bride"></span>عيلة العروسة</button>
-          <button class="chip" type="button" data-f="friends" aria-pressed="false"><span class="dot friends"></span>الأصحاب</button>
+          <button class="chip" type="button" data-f="groom" aria-pressed="false"><span class="dot groom"></span>معازيم العريس</button>
+          <button class="chip" type="button" data-f="bride" aria-pressed="false"><span class="dot bride"></span>معازيم العروسة</button>
         </div>
         <div class="list" id="list"></div>
-        <div class="legend"><span><span class="dot groom"></span>عيلة العريس</span><span><span class="dot bride"></span>عيلة العروسة</span><span><span class="dot friends"></span>الأصحاب</span></div>
+        <div class="legend"><span><span class="dot groom"></span>معازيم العريس</span><span><span class="dot bride"></span>معازيم العروسة</span></div>
       </aside>
       <div class="hall-wrap">
         <div class="hall" id="hall" aria-label="خريطة القاعة"></div>
@@ -381,7 +380,7 @@ button, input { font: inherit; color: inherit; }
   "use strict";
 
   var CAP = 10;
-  var SIDES = { groom: "عيلة العريس", bride: "عيلة العروسة", friends: "الأصحاب" };
+  var SIDES = { groom: "معازيم العريس", bride: "معازيم العروسة" };
   // positions are % of the hall (x from the left, y from the top); zone = which side sits there
   var TABLES = [
     // numbered from the stage, right to left, row by row
@@ -394,10 +393,10 @@ button, input { font: inherit; color: inherit; }
     { id: "t6", name: "٤", zone: "bride", x: 11.4, y: 40.0, c: "--glass-3" },
     { id: "t7", name: "٧", zone: "bride", x: 26.8, y: 61.9, c: "--glass-6" },
     { id: "t8", name: "٨", zone: "bride", x: 10.4, y: 61.8, c: "--glass-5" },
-    { id: "t9", name: "١١", zone: "friends", x: 36.0, y: 84.6, c: "--glass-1" },
-    { id: "t10", name: "١٢", zone: "friends", x: 18.4, y: 84.6, c: "--glass-4" },
-    { id: "t11", name: "١٠", zone: "friends", x: 64.7, y: 84.6, c: "--glass-2" },
-    { id: "t12", name: "٩", zone: "friends", x: 82.5, y: 84.5, c: "--glass-6" }
+    { id: "t9", name: "١١", zone: "bride", x: 36.0, y: 84.6, c: "--glass-1" },
+    { id: "t10", name: "١٢", zone: "bride", x: 18.4, y: 84.6, c: "--glass-4" },
+    { id: "t11", name: "١٠", zone: "groom", x: 64.7, y: 84.6, c: "--glass-2" },
+    { id: "t12", name: "٩", zone: "groom", x: 82.5, y: 84.5, c: "--glass-6" }
   ];
   var ZONE_LABELS = [
     { side: "groom", x: 82, y: 25.5 }, { side: "bride", x: 19, y: 25.5 }
@@ -425,18 +424,18 @@ button, input { font: inherit; color: inherit; }
     { id: "b8", side: "bride", prio: 2, title: "عيلة باسم عزت", m: ["باسم عزت", "رشا عزت"] },
     { id: "b9", side: "bride", prio: 2, title: "عيلة ناصر فؤاد", m: ["ناصر فؤاد", "أمل فؤاد", "ملك ناصر", "جودي ناصر"] },
     { id: "b10", side: "bride", prio: 3, title: "أ. عفاف البنا", m: ["عفاف البنا", "دعاء البنا", "ولاء البنا"] },
-    { id: "f1", side: "friends", prio: 2, title: "أصحاب العريس من الشغل", m: ["مازن عاطف", "كريم سمير", "أحمد ياسر", "محمد عصام", "عمرو جلال"] },
-    { id: "f2", side: "friends", prio: 2, title: "أصحاب العريس من الجامعة", m: ["حازم فتحي", "مصطفى ماهر", "يوسف حسن", "شادي نبيل"] },
-    { id: "f3", side: "friends", prio: 2, title: "أصحاب العروسة من المدرسة", m: ["رنا فاروق", "ميار عادل", "هبة رأفت", "سلمى حاتم", "ندى خليل", "آية سعيد"] },
-    { id: "f4", side: "friends", prio: 2, title: "أصحاب العروسة من الشغل", m: ["منة الله طه", "دينا مراد", "بسنت علاء"] },
-    { id: "f5", side: "friends", prio: 3, title: "عيلة أحمد الصاوي", m: ["أحمد الصاوي", "لمياء الصاوي", "تميم أحمد"] },
-    { id: "f6", side: "friends", prio: 3, title: "عيلة كريم نور الدين", m: ["كريم نور الدين", "ياسمين نور الدين"] },
-    { id: "f7", side: "friends", prio: 3, title: "م. هاني رشدي", m: ["هاني رشدي", "سمر رشدي"] },
-    { id: "f8", side: "friends", prio: 3, title: "عيلة عمرو البحيري", m: ["عمرو البحيري", "مروة البحيري", "فارس عمرو", "جنا عمرو"] }
+    { id: "f1", side: "groom", prio: 3, title: "أصحاب العريس من الشغل", m: ["مازن عاطف", "كريم سمير", "أحمد ياسر", "محمد عصام", "عمرو جلال"] },
+    { id: "f2", side: "groom", prio: 3, title: "أصحاب العريس من الجامعة", m: ["حازم فتحي", "مصطفى ماهر", "يوسف حسن", "شادي نبيل"] },
+    { id: "f3", side: "bride", prio: 3, title: "أصحاب العروسة من المدرسة", m: ["رنا فاروق", "ميار عادل", "هبة رأفت", "سلمى حاتم", "ندى خليل", "آية سعيد"] },
+    { id: "f4", side: "bride", prio: 3, title: "أصحاب العروسة من الشغل", m: ["منة الله طه", "دينا مراد", "بسنت علاء"] },
+    { id: "f5", side: "groom", prio: 3, title: "عيلة أحمد الصاوي", m: ["أحمد الصاوي", "لمياء الصاوي", "تميم أحمد"] },
+    { id: "f6", side: "bride", prio: 3, title: "عيلة كريم نور الدين", m: ["كريم نور الدين", "ياسمين نور الدين"] },
+    { id: "f7", side: "groom", prio: 3, title: "م. هاني رشدي", m: ["هاني رشدي", "سمر رشدي"] },
+    { id: "f8", side: "bride", prio: 3, title: "عيلة عمرو البحيري", m: ["عمرو البحيري", "مروة البحيري", "فارس عمرو", "جنا عمرو"] }
   ];
   // parties left unseated in the opening example so there is something to arrange
   var START_UNSEATED = ["g10", "g11", "b9", "b10", "f3", "f6", "f7", "f8"];
-  var STORE = "ajwaa-seating-demo-v1";
+  var STORE = "ajwaa-seating-demo-v2";
 
   var byId = {};
   PARTIES.forEach(function (p) { p.size = p.m.length; byId[p.id] = p; });
@@ -474,7 +473,7 @@ button, input { font: inherit; color: inherit; }
   }
   function dist(a, x, y) { return Math.hypot(a.x - x, a.y - y); }
   var STAGE = { x: 50, y: 15 };
-  var ZONE_CENTER = { groom: { x: 82, y: 51 }, bride: { x: 19, y: 51 }, friends: { x: 50, y: 85 } };
+  var ZONE_CENTER = { groom: { x: 82, y: 60 }, bride: { x: 19, y: 60 } };
 
   // Seats every unseated party: close family first and nearest the stage, each side in its own zone,
   // overflow to the nearest table with room. Families are never split.
